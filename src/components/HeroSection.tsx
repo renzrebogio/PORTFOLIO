@@ -29,7 +29,7 @@ const HeroSection = () => {
             {/* Profile Image */}
             <div className="mb-8">
               <div className="w-52 h-52 mx-auto rounded-full border-4 border-primary bg-muted overflow-hidden neon-glow">
-                <img src="src/assets/1x1.png" alt="Profile Photo" className="w-full h-full object-cover" />
+                <img src="/1x1.png" alt="Profile Photo" className="w-full h-full object-cover" />
               </div>
             </div>
             

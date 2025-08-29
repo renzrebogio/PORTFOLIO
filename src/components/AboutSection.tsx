@@ -11,7 +11,7 @@ const AboutSection = () => {
       title: "Introduction to Frontend Development",
       issuer: "Simplilearn",
       year: "2025",
-      image: "src/assets/E-Certificate (Introduction to Frontend Development).jpg" // Replace with your actual certificate image path
+      image: "/E-Certificate (Introduction to Frontend Development).jpg" // Replace with your actual certificate image path
     }
   ];
 
