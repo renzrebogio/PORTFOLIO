@@ -33,9 +33,9 @@ const AboutSection = () => {
           
           <div className="grid md:grid-cols-2 gap-8">
             {/* Profile Card */}
-            <Card className="card-futuristic hover:neon-glow transition-all duration-300 animate-slide-up group">
+            <Card className="card-futuristic hover:neon-glow transition-all duration-300 animate-slide-up group h-full">
               <CardContent className="p-8">
-                 <h3 className="text-2xl font-bold mb-6 text-primary flex items-center gap-2">
+                <h3 className="text-2xl font-bold mb-6 text-primary flex items-center gap-2">
                   <User className="text-primary" size={24} />
                   Profile
                 </h3>
@@ -48,7 +48,7 @@ const AboutSection = () => {
             </Card>
 
             {/* Education & Contact Card */}
-            <Card className="card-futuristic hover:neon-glow transition-all duration-300 animate-slide-up group">
+            <Card className="card-futuristic hover:neon-glow transition-all duration-300 animate-slide-up group h-full">
               <CardContent className="p-8">
                 <h3 className="text-2xl font-bold mb-6 text-primary flex items-center gap-2">
                   <GraduationCap className="text-primary" size={24} />
@@ -57,10 +57,9 @@ const AboutSection = () => {
                 
                 <div className="space-y-4 mb-6">
                   <div className="flex items-start gap-3">
-
                     <div>
                       <p className="font-semibold">Bachelor of Science in Computer Engineering</p>
-                      <p className="text-sm text-muted-foreground"><i>San Sebastian College – Recoletos de Cavite</i></p>
+                      <p className="text-sm text-muted-foreground">San Sebastian College – Recoletos de Cavite</p>
                       <p className="text-sm text-muted-foreground">Expected Graduation: 2026 | Dean's Lister</p>
                     </div>
                   </div>
@@ -81,7 +80,7 @@ const AboutSection = () => {
                   </div>
                   <div className="flex items-center gap-3">
                     <Linkedin className="text-primary flex-shrink-0" size={18} />
-                    <span className="text-sm">Renz Martin Rebogio</span>
+                    <span className="text-sm">LinkedIn Profile</span>
                   </div>
                 </div>
               </CardContent>
@@ -89,7 +88,7 @@ const AboutSection = () => {
           </div>
 
           {/* Certifications Card - Full Width */}
-          <Card className="card-futuristic hover:neon-glow transition-all duration-300 animate-slide-up group mt-8">
+          <Card className="card-futuristic hover:neon-glow transition-all duration-300 animate-slide-up group h-full mt-8">
             <CardContent className="p-8">
               <h3 className="text-2xl font-bold mb-6 text-primary flex items-center gap-2">
                 <Award className="text-primary" size={24} />
@@ -122,14 +121,14 @@ const AboutSection = () => {
       {selectedCertificate && (
         <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
           <div className="relative max-w-4xl max-h-[90vh] w-full">
-            <button
-              onClick={closeCertificate}
-              className="absolute -top-12 right-0 text-white hover:text-primary transition-colors"
-            >
-              <X size={32} />
-            </button>
-            <div className="bg-background rounded-lg p-6 max-h-[90vh] overflow-auto">
-              <div className="mb-4">
+            <div className="bg-background rounded-lg p-6 max-h-[90vh] overflow-auto relative">
+              <button
+                onClick={closeCertificate}
+                className="absolute top-4 right-4 text-muted-foreground hover:text-primary transition-colors z-10"
+              >
+                <X size={24} />
+              </button>
+              <div className="mb-4 pr-10">
                 <h3 className="text-xl font-bold text-foreground">{selectedCertificate.title}</h3>
                 <p className="text-muted-foreground">{selectedCertificate.issuer} • {selectedCertificate.year}</p>
               </div>
