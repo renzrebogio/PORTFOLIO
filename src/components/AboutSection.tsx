@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
-import { GraduationCap, MapPin, Mail, Phone, Linkedin, Award, Eye, X, User } from 'lucide-react';
+import { GraduationCap, MapPin, Mail, Linkedin, Award, Eye, X, User, Github } from 'lucide-react';
 
 const AboutSection = () => {
   const [selectedCertificate, setSelectedCertificate] = useState(null);
@@ -71,17 +71,18 @@ const AboutSection = () => {
                     <span className="text-sm">Cavite City, Cavite</span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <Phone className="text-primary flex-shrink-0" size={18} />
-                    <span className="text-sm">09914985418</span>
-                  </div>
-                  <div className="flex items-center gap-3">
                     <Mail className="text-primary flex-shrink-0" size={18} />
                     <span className="text-sm">renzmartinrebogio@gmail.com</span>
                   </div>
                   <div className="flex items-center gap-3">
                     <Linkedin className="text-primary flex-shrink-0" size={18} />
-                    <span className="text-sm">LinkedIn Profile</span>
+                    <span className="text-sm">Renz Martin Rebogio</span>
                   </div>
+                  <div className="flex items-center gap-3">
+                    <Github className="text-primary flex-shrink-0" size={18} />
+                    <span className="text-sm">renzrebogio</span>
+                  </div>
+                  
                 </div>
               </CardContent>
             </Card>

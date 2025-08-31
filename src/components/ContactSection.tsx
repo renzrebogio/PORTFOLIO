@@ -2,22 +2,10 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { Mail, Phone, MapPin, Linkedin, Send } from 'lucide-react';
+import { Mail, Phone, MapPin, Linkedin, Send, Github } from 'lucide-react';
 
 const ContactSection = () => {
   const contactInfo = [
-    {
-      icon: <Mail className="w-6 h-6" />,
-      label: 'Email',
-      value: 'renzmartinrebogio@gmail.com',
-      link: 'mailto:renzmartinrebogio@gmail.com'
-    },
-    {
-      icon: <Phone className="w-6 h-6" />,
-      label: 'Phone',
-      value: '09914985418',
-      link: 'tel:09914985418'
-    },
     {
       icon: <MapPin className="w-6 h-6" />,
       label: 'Location',
@@ -25,10 +13,22 @@ const ContactSection = () => {
       link: null
     },
     {
+      icon: <Mail className="w-6 h-6" />,
+      label: 'Email',
+      value: 'renzmartinrebogio@gmail.com',
+      link: 'mailto:renzmartinrebogio@gmail.com'
+    },
+    {
       icon: <Linkedin className="w-6 h-6" />,
       label: 'LinkedIn',
-      value: 'Connect with me',
-      link: '#'
+      value: 'Renz Martin Rebogio',
+      link: 'https://linkedin.com/in/renz-martin-rebogio-3916ab364'
+    },
+    {
+      icon: <Github className="w-6 h-6" />,
+      label: 'Github',
+      value: 'renzrebogio',
+      link: 'https://github.com/renzrebogio'
     }
   ];
 
@@ -65,6 +65,8 @@ const ContactSection = () => {
                           {contact.link ? (
                             <a 
                               href={contact.link}
+                              target="_blank"
+                              rel="noopener noreferrer"
                               className="text-muted-foreground hover:text-primary transition-colors"
                             >
                               {contact.value}
@@ -85,7 +87,7 @@ const ContactSection = () => {
               <CardContent className="p-8">
                 <h3 className="text-2xl font-bold mb-6 text-primary">Send a Message</h3>
                 
-                <form className="space-y-6">
+                <div className="space-y-6">
                   <div className="grid md:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-sm font-medium mb-2 text-foreground">
@@ -133,7 +135,7 @@ const ContactSection = () => {
                     <Send size={20} className="mr-2" />
                     Send Message
                   </Button>
-                </form>
+                </div>
               </CardContent>
             </Card>
           </div>
