@@ -1,9 +1,31 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { ExternalLink, Github, Calendar, Users, Zap } from 'lucide-react';
+import { ExternalLink, Github, Calendar, Users, Zap, X, Play } from 'lucide-react';
+import { useState } from 'react';
 
 const ProjectsSection = () => {
+  const [selectedVideo, setSelectedVideo] = useState(null);
+
+  // Helper function to check if URL is YouTube and convert to embed format
+  const getVideoEmbedUrl = (url) => {
+    if (url.includes('youtu.be/') || url.includes('youtube.com/')) {
+      // Extract video ID from different YouTube URL formats
+      let videoId;
+      if (url.includes('youtu.be/')) {
+        videoId = url.split('youtu.be/')[1].split('?')[0];
+      } else if (url.includes('youtube.com/watch?v=')) {
+        videoId = url.split('v=')[1].split('&')[0];
+      }
+      return `https://www.youtube.com/embed/${videoId}`;
+    }
+    return url; // Return original URL for direct MP4 files
+  };
+
+  const isYouTubeVideo = (url) => {
+    return url.includes('youtu.be/') || url.includes('youtube.com/');
+  };
+
   const projects = [
     {
       title: 'Mobile Fitness Application',
@@ -16,7 +38,9 @@ const ProjectsSection = () => {
       ],
       technologies: ['Flutter', 'Dart', 'Firebase'],
       teamSize: '4 members',
-      role: 'Full-Stack Developer & Team Lead'
+      role: 'Full-Stack Developer & Team Lead',
+      demoVideo: 'https://youtu.be/wywp3TC-3Jg',
+      githubUrl: 'https://github.com/yourusername/fitness-app'
     },
     {
       title: 'Full Stack AI SaaS Web',
@@ -30,7 +54,9 @@ const ProjectsSection = () => {
       ],
       technologies: ['PostgreSQL', 'Express', 'React', 'NodeJS'],
       teamSize: 'Solo Project',
-      role: 'Full-Stack Developer'
+      role: 'Full-Stack Developer',
+      demoVideo: 'https://youtu.be/mfN3cW8A_aQ',
+      githubUrl: 'https://github.com/yourusername/ai-saas'
     },
     {
       title: 'Full Stack Food Delivery',
@@ -44,7 +70,9 @@ const ProjectsSection = () => {
       ],
       technologies: ['React JS', 'MongoDB', 'Express', 'NodeJS', 'Stripe'],
       teamSize: 'Solo Project', 
-      role: 'Full-Stack Developer'
+      role: 'Full-Stack Developer',
+      demoVideo: 'https://your-video-host.com/food-delivery-demo.mp4',
+      githubUrl: 'https://github.com/yourusername/food-delivery'
     },
     {
       title: 'Online Campus Bookstore Website',
@@ -58,7 +86,9 @@ const ProjectsSection = () => {
       ],
       technologies: ['HTML', 'CSS', 'JavaScript'],
       teamSize: 'Team Project',
-      role: 'Frontend Developer & Team Lead'
+      role: 'Frontend Developer & Team Lead',
+      demoVideo: 'https://youtu.be/AvPzQJBS-GE',
+      githubUrl: 'https://github.com/yourusername/campus-bookstore'
     }
   ];
 
@@ -128,12 +158,21 @@ const ProjectsSection = () => {
                   </div>
 
                   <div className="flex gap-3 mt-auto">
-                    <Button variant="outline" size="sm" className="border-primary/40 text-primary hover:bg-primary/10">
+                    <Button 
+                      variant="outline" 
+                      size="sm" 
+                      className="border-primary/40 text-primary hover:bg-primary/10"
+                      onClick={() => window.open(project.githubUrl, '_blank')}
+                    >
                       <Github size={16} className="mr-2" />
                       Code
                     </Button>
-                    <Button size="sm" className="neon-glow">
-                      <ExternalLink size={16} className="mr-2" />
+                    <Button 
+                      size="sm" 
+                      className="neon-glow"
+                      onClick={() => setSelectedVideo(project)}
+                    >
+                      <Play size={16} className="mr-2" />
                       Demo
                     </Button>
                   </div>
@@ -143,6 +182,67 @@ const ProjectsSection = () => {
           </div>
         </div>
       </div>
+
+      {/* Video Modal */}
+      {selectedVideo && (
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="relative max-w-4xl w-full max-h-[90vh] bg-background rounded-lg overflow-hidden border border-primary/20">
+            {/* Modal Header */}
+            <div className="flex items-center justify-between p-4 border-b border-primary/20">
+              <h3 className="text-xl font-bold text-primary">{selectedVideo.title} - Demo</h3>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setSelectedVideo(null)}
+                className="hover:bg-primary/10"
+              >
+                <X size={20} />
+              </Button>
+            </div>
+            
+            {/* Video Content */}
+            <div className="relative aspect-video bg-black">
+              {isYouTubeVideo(selectedVideo.demoVideo) ? (
+                <iframe
+                  src={getVideoEmbedUrl(selectedVideo.demoVideo)}
+                  className="w-full h-full"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  title={`${selectedVideo.title} Demo`}
+                />
+              ) : (
+                <video
+                  controls
+                  autoPlay
+                  muted
+                  className="w-full h-full object-contain"
+                  poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23000'/%3E%3Ctext x='50' y='50' text-anchor='middle' dy='.3em' fill='%23666'%3ELoading...%3C/text%3E%3C/svg%3E"
+                >
+                  <source src={selectedVideo.demoVideo} type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              )}
+            </div>
+            
+            {/* Video Description */}
+            <div className="p-4 space-y-2">
+              <p className="text-sm text-muted-foreground">{selectedVideo.description}</p>
+              <div className="flex flex-wrap gap-2">
+                {selectedVideo.technologies.map((tech, index) => (
+                  <Badge 
+                    key={index}
+                    variant="secondary"
+                    className="bg-primary/10 text-primary border-primary/20"
+                  >
+                    {tech}
+                  </Badge>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };
