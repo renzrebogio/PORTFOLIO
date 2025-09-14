@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { ExternalLink, Github, Calendar, Users, Zap, X, Play } from 'lucide-react';
+import { ExternalLink, Github, Calendar, Users, Zap, X, Play, Image } from 'lucide-react';
 import { useState } from 'react';
 
 const ProjectsSection = () => {
@@ -39,6 +39,7 @@ const ProjectsSection = () => {
       technologies: ['Flutter', 'Dart', 'Firebase'],
       teamSize: '4 members',
       role: 'Full-Stack Developer & Team Lead',
+      thumbnail: 'mobilefitnessapp_thumbnail.jpg', // Replace with your image URL
       demoVideo: 'https://youtu.be/wywp3TC-3Jg',
       githubUrl: 'https://github.com/yourusername/fitness-app'
     },
@@ -55,6 +56,7 @@ const ProjectsSection = () => {
       technologies: ['PostgreSQL', 'Express', 'React', 'NodeJS'],
       teamSize: 'Solo Project',
       role: 'Full-Stack Developer',
+      thumbnail: 'zeeaisaas_thumbnail.jpg', // Replace with your image URL
       demoVideo: 'https://youtu.be/mfN3cW8A_aQ',
       githubUrl: 'https://github.com/yourusername/ai-saas'
     },
@@ -71,6 +73,7 @@ const ProjectsSection = () => {
       technologies: ['React JS', 'MongoDB', 'Express', 'NodeJS', 'Stripe'],
       teamSize: 'Solo Project', 
       role: 'Full-Stack Developer',
+      thumbnail: 'https://via.placeholder.com/400x250/1a1a2e/16213e?text=Food+Delivery', // Replace with your image URL
       demoVideo: 'https://your-video-host.com/food-delivery-demo.mp4',
       githubUrl: 'https://github.com/yourusername/food-delivery'
     },
@@ -87,6 +90,7 @@ const ProjectsSection = () => {
       technologies: ['HTML', 'CSS', 'JavaScript'],
       teamSize: 'Team Project',
       role: 'Frontend Developer & Team Lead',
+      thumbnail: 'bastebookmart_thumbnail.jpg', // Replace with your image URL
       demoVideo: 'https://youtu.be/AvPzQJBS-GE',
       githubUrl: 'https://github.com/yourusername/campus-bookstore'
     }
@@ -102,18 +106,46 @@ const ProjectsSection = () => {
 
           <div className="grid md:grid-cols-2 gap-8">
             {projects.map((project, index) => (
-              <Card key={index} className="card-futuristic hover:neon-glow transition-all duration-300 animate-slide-up group h-full">
-                <CardHeader>
-                  <div className="flex items-start justify-between mb-2">
-                    <CardTitle className="text-xl font-bold group-hover:text-primary transition-colors">
-                      {project.title}
-                    </CardTitle>
-                    <Badge variant="outline" className="border-primary/40 text-primary">
-                      {project.year}
-                    </Badge>
+              <Card key={index} className="card-futuristic hover:neon-glow transition-all duration-300 animate-slide-up group h-full overflow-hidden">
+                {/* Project Thumbnail */}
+                <div className="relative h-56 overflow-hidden bg-gradient-to-br from-primary/10 to-primary/5">
+                  <img
+                    src={project.thumbnail}
+                    alt={`${project.title} thumbnail`}
+                    className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-300"
+                    onError={(e) => {
+                      // Fallback if image fails to load
+                      const img = e.target as HTMLImageElement;
+                      img.style.display = 'none';
+                      if (img.nextSibling && img.nextSibling instanceof HTMLElement) {
+                        (img.nextSibling as HTMLElement).style.display = 'flex';
+                      }
+                    }}
+                  />
+                  {/* Fallback placeholder */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-primary/5 items-center justify-center hidden">
+                    <div className="text-center text-muted-foreground">
+                      <Image size={48} className="mx-auto mb-2 opacity-50" />
+                      <p className="text-sm font-medium">{project.title}</p>
+                    </div>
                   </div>
+                  {/* Overlay gradient */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent"></div>
+                  {/* Project year badge overlay */}
+                  <Badge 
+                    variant="outline" 
+                    className="absolute top-3 right-3 border-primary/40 text-primary bg-background/80 backdrop-blur-sm"
+                  >
+                    {project.year}
+                  </Badge>
+                </div>
+
+                <CardHeader className="pb-4">
+                  <CardTitle className="text-xl font-bold group-hover:text-primary transition-colors">
+                    {project.title}
+                  </CardTitle>
                   
-                  <div className="flex items-center gap-4 text-sm text-muted-foreground mb-4">
+                  <div className="flex items-center gap-4 text-sm text-muted-foreground">
                     <div className="flex items-center gap-2">
                       <Users size={16} />
                       <span>{project.teamSize}</span>
@@ -125,7 +157,7 @@ const ProjectsSection = () => {
                   </div>
                 </CardHeader>
 
-                <CardContent className="flex-1 flex flex-col">
+                <CardContent className="flex-1 flex flex-col pt-0">
                   <p className="text-muted-foreground mb-4 leading-relaxed">
                     {project.description}
                   </p>
