@@ -28,23 +28,24 @@ const ProjectsSection = () => {
 
   const projects = [
     {
-      title: 'Mobile Fitness Application',
-      year: '2024',
-      description: 'Led a 4-member team as the primary full-stack developer, planning the comprehensive tech stack including Flutter, Dart, and Firebase while supporting both frontend and backend development.',
+      title: 'Insurance Company Website',
+      year: 'Ongoing',
+      description: 'Collaborating with a design partner to develop a professional business website for an insurance company using Next.js and TypeScript. Leading the development while working closely with a UI/UX specialist to deliver a modern, client-branded web presence.',
       achievements: [
-        'Delivered project on time with excellent feedback',
-        'Coordinated closely with UI/UX teammates',
-        'Successfully integrated features for optimal user experience'
+        'Built responsive web architecture optimized for all devices',
+        'Developed reusable TypeScript components with scalable architecture',
+        'Successfully translated design concepts into functional interfaces',
+        'Created solid frontend foundation ready for backend integration'
       ],
-      technologies: ['Flutter', 'Dart', 'Firebase'],
-      teamSize: '4 members',
-      role: 'Full-Stack Developer & Team Lead',
-      thumbnail: 'mobilefitnessapp_thumbnail.jpg', // Replace with your image URL
-      demoVideo: 'https://youtu.be/wywp3TC-3Jg',
-      githubUrl: 'https://github.com/yourusername/fitness-app'
+      technologies: ['Next.js', 'TypeScript', 'React', 'Tailwind CSS'],
+      teamSize: '2 members',
+      role: 'Main Frontend Developer',
+      thumbnail: 'insurancecompany_thumbnail.jpg', // Replace with your image URL
+      demoVideo: 'https://your-video-host.com/insurance-demo.mp4',
+      githubUrl: 'https://github.com/yourusername/insurance-website'
     },
     {
-      title: 'Full Stack AI SaaS Web',
+      title: 'ZeeAI - Full Stack AI SaaS Web',
       year: '2025',
       description: 'Developed a full-stack AI SaaS web application using React, NodeJS, Express, and PostgreSQL, integrating advanced APIs for text and image generation and editing capabilities.',
       achievements: [
@@ -61,24 +62,7 @@ const ProjectsSection = () => {
       githubUrl: 'https://github.com/yourusername/ai-saas'
     },
     {
-      title: 'Full Stack Food Delivery',
-      year: '2025', 
-      description: 'Built a comprehensive food delivery web application demonstrating complete end-to-end development capability with secure user authentication, efficient database-driven order management, and seamless payment processing.',
-      achievements: [
-        'Completed entire project independently',
-        'Implemented secure authentication systems',
-        'Built efficient order management system',
-        'Integrated Stripe payment processing'
-      ],
-      technologies: ['React JS', 'MongoDB', 'Express', 'NodeJS', 'Stripe'],
-      teamSize: 'Solo Project', 
-      role: 'Full-Stack Developer',
-      thumbnail: 'https://via.placeholder.com/400x250/1a1a2e/16213e?text=Food+Delivery', // Replace with your image URL
-      demoVideo: 'https://your-video-host.com/food-delivery-demo.mp4',
-      githubUrl: 'https://github.com/yourusername/food-delivery'
-    },
-    {
-      title: 'Online Campus Bookstore Website',
+      title: 'Baste BookMart - Online Campus Bookstore Website',
       year: '2025',
       description: 'Led a collaborative team in designing and developing a frontend-only online campus bookstore using HTML, CSS, and JavaScript, specifically tailored to reflect the school\'s unique branding and services.',
       achievements: [
@@ -93,22 +77,55 @@ const ProjectsSection = () => {
       thumbnail: 'bastebookmart_thumbnail.jpg', // Replace with your image URL
       demoVideo: 'https://youtu.be/AvPzQJBS-GE',
       githubUrl: 'https://github.com/yourusername/campus-bookstore'
+    },
+    {
+      title: 'Casa Lasa - Full Stack Food Delivery',
+      year: '2025', 
+      description: 'Built a comprehensive food delivery web application demonstrating complete end-to-end development capability with secure user authentication, efficient database-driven order management, and seamless payment processing.',
+      achievements: [
+        'Completed entire project independently',
+        'Implemented secure authentication systems',
+        'Built efficient order management system',
+        'Integrated Stripe payment processing'
+      ],
+      technologies: ['React JS', 'MongoDB', 'Express', 'NodeJS', 'Stripe'],
+      teamSize: 'Solo Project', 
+      role: 'Full-Stack Developer',
+      thumbnail: 'casalasa_thumbnail.jpg', // Replace with your image URL
+      demoVideo: 'https://your-video-host.com/food-delivery-demo.mp4',
+      githubUrl: 'https://github.com/yourusername/food-delivery'
+    },
+    {
+      title: 'Mobile Fitness Application',
+      year: '2024',
+      description: 'Led a 4-member team as the primary full-stack developer, planning the comprehensive tech stack including Flutter, Dart, and Firebase while supporting both frontend and backend development.',
+      achievements: [
+        'Delivered project on time with excellent feedback',
+        'Coordinated closely with UI/UX teammates',
+        'Successfully integrated features for optimal user experience'
+      ],
+      technologies: ['Flutter', 'Dart', 'Firebase'],
+      teamSize: '4 members',
+      role: 'Full-Stack Developer & Team Lead',
+      thumbnail: 'mobilefitnessapp_thumbnail.jpg', // Replace with your image URL
+      demoVideo: 'https://youtu.be/wywp3TC-3Jg',
+      githubUrl: 'https://github.com/yourusername/fitness-app'
     }
   ];
 
   return (
     <section id="projects" className="py-20">
       <div className="container mx-auto px-6">
-        <div className="max-w-6xl mx-auto">
+        <div className="w-full max-w-[1400px] mx-auto">
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 text-glow">
             Featured Projects
           </h2>
 
-          <div className="grid md:grid-cols-2 gap-8">
-            {projects.map((project, index) => (
-              <Card key={index} className="card-futuristic hover:neon-glow transition-all duration-300 animate-slide-up group h-full overflow-hidden">
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-10">
+            {projects.slice(0, 3).map((project, index) => (
+              <Card key={index} className="card-futuristic hover:neon-glow transition-all duration-300 animate-slide-up group overflow-hidden flex flex-col">
                 {/* Project Thumbnail */}
-                <div className="relative h-56 overflow-hidden bg-gradient-to-br from-primary/10 to-primary/5">
+                <div className="relative h-64 overflow-hidden bg-gradient-to-br from-primary/10 to-primary/5">
                   <img
                     src={project.thumbnail}
                     alt={`${project.title} thumbnail`}
@@ -134,77 +151,191 @@ const ProjectsSection = () => {
                   {/* Project year badge overlay */}
                   <Badge 
                     variant="outline" 
-                    className="absolute top-3 right-3 border-primary/40 text-primary bg-background/80 backdrop-blur-sm"
+                    className="absolute top-3 right-3 border-primary/40 text-primary bg-background/90 backdrop-blur-sm px-3 py-1 text-base font-semibold"
                   >
                     {project.year}
                   </Badge>
                 </div>
 
                 <CardHeader className="pb-4">
-                  <CardTitle className="text-xl font-bold group-hover:text-primary transition-colors">
+                  <CardTitle className="text-2xl font-bold group-hover:text-primary transition-colors">
                     {project.title}
                   </CardTitle>
                   
-                  <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                  <div className="flex items-center gap-4 text-base text-muted-foreground">
                     <div className="flex items-center gap-2">
-                      <Users size={16} />
+                      <Users size={18} />
                       <span>{project.teamSize}</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <Zap size={16} />
+                      <Zap size={18} />
                       <span>{project.role}</span>
                     </div>
                   </div>
                 </CardHeader>
 
                 <CardContent className="flex-1 flex flex-col pt-0">
-                  <p className="text-muted-foreground mb-4 leading-relaxed">
-                    {project.description}
-                  </p>
+                  <div className="flex-1 space-y-4">
+                    <p className="text-muted-foreground leading-relaxed text-base">
+                      {project.description}
+                    </p>
 
-                  <div className="mb-4">
-                    <h4 className="font-semibold mb-2 text-primary">Key Achievements:</h4>
-                    <ul className="space-y-1">
-                      {project.achievements.map((achievement, achIndex) => (
-                        <li key={achIndex} className="text-sm text-muted-foreground flex items-start gap-2">
-                          <div className="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                          {achievement}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                    <div>
+                      <h4 className="font-semibold mb-2 text-primary text-lg">Key Achievements:</h4>
+                      <ul className="space-y-1">
+                        {project.achievements.map((achievement, achIndex) => (
+                          <li key={achIndex} className="text-base text-muted-foreground flex items-start gap-2">
+                            <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                            {achievement}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
 
-                  <div className="mb-6">
-                    <h4 className="font-semibold mb-3 text-primary">Technologies Used:</h4>
-                    <div className="flex flex-wrap gap-2">
-                      {project.technologies.map((tech, techIndex) => (
-                        <Badge 
-                          key={techIndex}
-                          variant="secondary"
-                          className="bg-primary/10 text-primary border-primary/20"
-                        >
-                          {tech}
-                        </Badge>
-                      ))}
+                    <div>
+                      <h4 className="font-semibold mb-3 text-primary text-lg">Technologies Used:</h4>
+                      <div className="flex flex-wrap gap-2">
+                        {project.technologies.map((tech, techIndex) => (
+                          <Badge 
+                            key={techIndex}
+                            variant="secondary"
+                            className="bg-primary/10 text-primary border-primary/20 text-sm px-3 py-1"
+                          >
+                            {tech}
+                          </Badge>
+                        ))}
+                      </div>
                     </div>
                   </div>
 
-                  <div className="flex gap-3 mt-auto">
+                  <div className="flex gap-3 mt-6 pt-4 border-t border-primary/10">
                     <Button 
                       variant="outline" 
-                      size="sm" 
+                      size="default" 
                       className="border-primary/40 text-primary hover:bg-primary/10"
                       onClick={() => window.open(project.githubUrl, '_blank')}
                     >
-                      <Github size={16} className="mr-2" />
+                      <Github size={18} className="mr-2" />
                       Code
                     </Button>
                     <Button 
-                      size="sm" 
+                      size="default" 
                       className="neon-glow"
                       onClick={() => setSelectedVideo(project)}
                     >
-                      <Play size={16} className="mr-2" />
+                      <Play size={18} className="mr-2" />
+                      Demo
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+          {/* Second row - 2 projects centered */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-[1000px] mx-auto mt-10">
+            {projects.slice(3).map((project, index) => (
+              <Card key={index + 3} className="card-futuristic hover:neon-glow transition-all duration-300 animate-slide-up group overflow-hidden flex flex-col">
+                {/* Project Thumbnail */}
+                <div className="relative h-64 overflow-hidden bg-gradient-to-br from-primary/10 to-primary/5">
+                  <img
+                    src={project.thumbnail}
+                    alt={`${project.title} thumbnail`}
+                    className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-300"
+                    onError={(e) => {
+                      // Fallback if image fails to load
+                      const img = e.target as HTMLImageElement;
+                      img.style.display = 'none';
+                      if (img.nextSibling && img.nextSibling instanceof HTMLElement) {
+                        (img.nextSibling as HTMLElement).style.display = 'flex';
+                      }
+                    }}
+                  />
+                  {/* Fallback placeholder */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-primary/5 items-center justify-center hidden">
+                    <div className="text-center text-muted-foreground">
+                      <Image size={48} className="mx-auto mb-2 opacity-50" />
+                      <p className="text-sm font-medium">{project.title}</p>
+                    </div>
+                  </div>
+                  {/* Overlay gradient */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent"></div>
+                  {/* Project year badge overlay */}
+                  <Badge 
+                    variant="outline" 
+                    className="absolute top-3 right-3 border-primary/40 text-primary bg-background/90 backdrop-blur-sm px-3 py-1 text-base font-semibold"
+                  >
+                    {project.year}
+                  </Badge>
+                </div>
+
+                <CardHeader className="pb-4">
+                  <CardTitle className="text-2xl font-bold group-hover:text-primary transition-colors">
+                    {project.title}
+                  </CardTitle>
+                  
+                  <div className="flex items-center gap-4 text-base text-muted-foreground">
+                    <div className="flex items-center gap-2">
+                      <Users size={18} />
+                      <span>{project.teamSize}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Zap size={18} />
+                      <span>{project.role}</span>
+                    </div>
+                  </div>
+                </CardHeader>
+
+                <CardContent className="flex-1 flex flex-col pt-0">
+                  <div className="flex-1 space-y-4">
+                    <p className="text-muted-foreground leading-relaxed text-base">
+                      {project.description}
+                    </p>
+
+                    <div>
+                      <h4 className="font-semibold mb-2 text-primary text-lg">Key Achievements:</h4>
+                      <ul className="space-y-1">
+                        {project.achievements.map((achievement, achIndex) => (
+                          <li key={achIndex} className="text-base text-muted-foreground flex items-start gap-2">
+                            <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                            {achievement}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    <div>
+                      <h4 className="font-semibold mb-3 text-primary text-lg">Technologies Used:</h4>
+                      <div className="flex flex-wrap gap-2">
+                        {project.technologies.map((tech, techIndex) => (
+                          <Badge 
+                            key={techIndex}
+                            variant="secondary"
+                            className="bg-primary/10 text-primary border-primary/20 text-sm px-3 py-1"
+                          >
+                            {tech}
+                          </Badge>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-3 mt-6 pt-4 border-t border-primary/10">
+                    <Button 
+                      variant="outline" 
+                      size="default" 
+                      className="border-primary/40 text-primary hover:bg-primary/10"
+                      onClick={() => window.open(project.githubUrl, '_blank')}
+                    >
+                      <Github size={18} className="mr-2" />
+                      Code
+                    </Button>
+                    <Button 
+                      size="default" 
+                      className="neon-glow"
+                      onClick={() => setSelectedVideo(project)}
+                    >
+                      <Play size={18} className="mr-2" />
                       Demo
                     </Button>
                   </div>
