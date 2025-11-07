@@ -10,11 +10,11 @@ const SkillsSection = () => {
       subcategories: [
         {
           name: 'Core Technologies',
-          skills: ['HTML', 'CSS', 'JavaScript']
+          skills: ['HTML', 'CSS', 'JavaScript', 'TypeScript']
         },
         {
           name: 'Frameworks & Libraries',
-          skills: ['React', 'Angular']
+          skills: ['React', 'Next.js', 'Angular']
         },
         {
           name: 'Styling & UI',

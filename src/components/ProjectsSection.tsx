@@ -28,23 +28,6 @@ const ProjectsSection = () => {
 
   const projects = [
     {
-      title: 'Insurance Company Website',
-      year: 'Ongoing',
-      description: 'Collaborating with a design partner to develop a professional business website for an insurance company using Next.js and TypeScript. Leading the development while working closely with a UI/UX specialist to deliver a modern, client-branded web presence.',
-      achievements: [
-        'Built responsive web architecture optimized for all devices',
-        'Developed reusable TypeScript components with scalable architecture',
-        'Successfully translated design concepts into functional interfaces',
-        'Created solid frontend foundation ready for backend integration'
-      ],
-      technologies: ['Next.js', 'TypeScript', 'React', 'Tailwind CSS'],
-      teamSize: '2 members',
-      role: 'Main Frontend Developer',
-      thumbnail: 'insurancecompany_thumbnail.jpg', // Replace with your image URL
-      demoVideo: 'https://your-video-host.com/insurance-demo.mp4',
-      githubUrl: 'https://github.com/yourusername/insurance-website'
-    },
-    {
       title: 'ZeeAI - Full Stack AI SaaS Web',
       year: '2025',
       description: 'Developed a full-stack AI SaaS web application using React, NodeJS, Express, and PostgreSQL, integrating advanced APIs for text and image generation and editing capabilities.',
@@ -121,8 +104,8 @@ const ProjectsSection = () => {
             Featured Projects
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-10">
-            {projects.slice(0, 3).map((project, index) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-10 max-w-[1000px] mx-auto">
+            {projects.slice(0, 2).map((project, index) => (
               <Card key={index} className="card-futuristic hover:neon-glow transition-all duration-300 animate-slide-up group overflow-hidden flex flex-col">
                 {/* Project Thumbnail */}
                 <div className="relative h-64 overflow-hidden bg-gradient-to-br from-primary/10 to-primary/5">
@@ -234,8 +217,8 @@ const ProjectsSection = () => {
 
           {/* Second row - 2 projects centered */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-[1000px] mx-auto mt-10">
-            {projects.slice(3).map((project, index) => (
-              <Card key={index + 3} className="card-futuristic hover:neon-glow transition-all duration-300 animate-slide-up group overflow-hidden flex flex-col">
+            {projects.slice(2).map((project, index) => (
+              <Card key={index + 2} className="card-futuristic hover:neon-glow transition-all duration-300 animate-slide-up group overflow-hidden flex flex-col">
                 {/* Project Thumbnail */}
                 <div className="relative h-64 overflow-hidden bg-gradient-to-br from-primary/10 to-primary/5">
                   <img
