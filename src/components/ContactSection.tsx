@@ -40,6 +40,7 @@ const ContactSection = () => {
     
     try {
       const formId = import.meta.env.VITE_FORMSPREE_FORM_ID;
+      console.log('Formspree formId (build-time value):', formId);
       const response = await fetch(`https://formspree.io/f/${formId}`, {
         method: 'POST',
         headers: {
@@ -53,8 +54,11 @@ const ContactSection = () => {
         }),
       });
 
+      const text = await response.text();
+      console.log('Formspree response status:', response.status, 'body:', text);
+
       if (!response.ok) {
-        throw new Error('Failed to send');
+        throw new Error(`Failed to send: ${response.status}`);
       }
 
       toast({
