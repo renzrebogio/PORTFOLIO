@@ -4,7 +4,6 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Mail, Phone, MapPin, Linkedin, Send, Github } from 'lucide-react';
 import { useState } from 'react';
-import emailjs from '@emailjs/browser';
 import { useToast } from '@/hooks/use-toast';
 
 const ContactSection = () => {
@@ -40,20 +39,23 @@ const ContactSection = () => {
     setIsLoading(true);
     
     try {
-      // Initialize EmailJS (make sure to add your public key)
-      emailjs.init(import.meta.env.VITE_EMAILJS_PUBLIC_KEY);
-      
-      await emailjs.send(
-        import.meta.env.VITE_EMAILJS_SERVICE_ID,
-        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-        {
-          from_name: formData.name,
-          from_email: formData.email,
+      const formId = import.meta.env.VITE_FORMSPREE_FORM_ID;
+      const response = await fetch(`https://formspree.io/f/${formId}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
           subject: formData.subject,
           message: formData.message,
-          to_email: 'renzmartinrebogio@gmail.com'
-        }
-      );
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to send');
+      }
 
       toast({
         title: "Success!",
@@ -67,7 +69,7 @@ const ContactSection = () => {
         message: ''
       });
     } catch (error) {
-      console.error('Email send error:', error);
+      console.error('Form submission error:', error);
       toast({
         title: "Error",
         description: "Failed to send message. Please try again.",
