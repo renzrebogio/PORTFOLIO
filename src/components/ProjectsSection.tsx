@@ -28,6 +28,23 @@ const ProjectsSection = () => {
 
   const projects = [
     {
+      title: 'PIXELBOT',
+      year: '2025',
+      description: 'Created a computer-engineering inspired local co-op robot factory game in Python + Pygame, featuring a full play loop, menus, leaderboards, and controller-friendly input.',
+      achievements: [
+        'Implemented full harvest → process → assembly → delivery loop',
+        'Built story and time modes with per-level and overall leaderboards',
+        'Added local 2-player co-op with simultaneous input handling',
+        'Created robust menu, pause, and game-over flows with controller support'
+      ],
+      technologies: ['Python', 'Pygame'],
+      teamSize: 'Solo Project',
+      role: 'Gameplay Developer',
+      thumbnail: 'pixelbot_thumbnail.jpg',
+      demoVideo: 'https://youtu.be/dQw4w9WgXcQ',
+      githubUrl: 'https://github.com/yourusername/pixelbot'
+    },
+    {
       title: 'ZeeAI - Full Stack AI SaaS Web',
       year: '2025',
       description: 'Developed a full-stack AI SaaS web application using React, NodeJS, Express, and PostgreSQL, integrating advanced APIs for text and image generation and editing capabilities.',
