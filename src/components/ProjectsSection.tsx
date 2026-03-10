@@ -41,7 +41,7 @@ const ProjectsSection = () => {
       teamSize: 'Solo Project',
       role: 'Gameplay Developer',
       thumbnail: 'pixelbot_thumbnail.jpg',
-      demoVideo: 'https://youtu.be/dQw4w9WgXcQ',
+      demoVideo: '',
       githubUrl: 'https://github.com/yourusername/pixelbot'
     },
     {
@@ -92,7 +92,7 @@ const ProjectsSection = () => {
       teamSize: 'Solo Project', 
       role: 'Full-Stack Developer',
       thumbnail: 'casalasa_thumbnail.jpg', // Replace with your image URL
-      demoVideo: 'https://your-video-host.com/food-delivery-demo.mp4',
+      demoVideo: '',
       githubUrl: 'https://github.com/yourusername/food-delivery'
     },
     {
@@ -365,26 +365,35 @@ const ProjectsSection = () => {
             
             {/* Video Content */}
             <div className="relative aspect-video bg-black">
-              {isYouTubeVideo(selectedVideo.demoVideo) ? (
-                <iframe
-                  src={getVideoEmbedUrl(selectedVideo.demoVideo)}
-                  className="w-full h-full"
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  title={`${selectedVideo.title} Demo`}
-                />
+              {selectedVideo.demoVideo ? (
+                isYouTubeVideo(selectedVideo.demoVideo) ? (
+                  <iframe
+                    src={getVideoEmbedUrl(selectedVideo.demoVideo)}
+                    className="w-full h-full"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    title={`${selectedVideo.title} Demo`}
+                  />
+                ) : (
+                  <video
+                    controls
+                    autoPlay
+                    muted
+                    className="w-full h-full object-contain"
+                    poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23000'/%3E%3Ctext x='50' y='50' text-anchor='middle' dy='.3em' fill='%23666'%3ELoading...%3C/text%3E%3C/svg%3E"
+                  >
+                    <source src={selectedVideo.demoVideo} type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                )
               ) : (
-                <video
-                  controls
-                  autoPlay
-                  muted
-                  className="w-full h-full object-contain"
-                  poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23000'/%3E%3Ctext x='50' y='50' text-anchor='middle' dy='.3em' fill='%23666'%3ELoading...%3C/text%3E%3C/svg%3E"
-                >
-                  <source src={selectedVideo.demoVideo} type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
+                <div className="flex h-full items-center justify-center p-6 text-center">
+                  <div>
+                    <p className="text-lg font-semibold text-primary">Demo unavailable</p>
+                    <p className="text-sm text-muted-foreground mt-2">No demo video is currently available for this project.</p>
+                  </div>
+                </div>
               )}
             </div>
             
