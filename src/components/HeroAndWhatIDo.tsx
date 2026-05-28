@@ -68,7 +68,7 @@ const BrowserCard = ({ service }: { service: typeof services[0] }) => (
       </div>
       {/* Address bar */}
       <div className="flex-1 mx-2 px-3 py-1 rounded-md text-[10px] font-mono flex items-center gap-2" style={{ background: 'rgba(255,255,255,0.06)', color: 'rgba(255,255,255,0.35)' }}>
-        <svg className="w-3 h-3 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+        <svg className="w-3 h-3 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /><path d="m9 12 2 2 4-4" /></svg>
         renzrebogio.dev
       </div>
       {/* Label badge */}
@@ -163,7 +163,7 @@ const PhoneCard = ({ service }: { service: typeof services[0] }) => (
         {/* App header */}
         <div className="flex items-center gap-3 mb-1">
           <div className="w-10 h-10 rounded-2xl flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #e27500, #ff9500)' }}>
-            <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.7 9.05 7.42c1.39.07 2.35.77 3.17.83.94-.18 1.84-.9 3.33-.77 1.42.13 2.48.77 3.16 1.96-3.05 1.96-2.34 5.86.68 7.24-.54 1.14-1.26 2.28-2.34 3.6zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>
+            <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.7 9.05 7.42c1.39.07 2.35.77 3.17.83.94-.18 1.84-.9 3.33-.77 1.42.13 2.48.77 3.16 1.96-3.05 1.96-2.34 5.86.68 7.24-.54 1.14-1.26 2.28-2.34 3.6zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z" /></svg>
           </div>
           <div>
             <p className="text-xs font-bold" style={{ color: '#eaeaea' }}>RenzApp Studio</p>
@@ -211,11 +211,11 @@ const FigmaCard = ({ service }: { service: typeof services[0] }) => (
     <div className="flex items-center gap-3 px-4 py-2.5" style={{ background: '#2c2c2c', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
       {/* Figma logo */}
       <svg className="w-4 h-4 flex-shrink-0" viewBox="0 0 38 57" fill="none">
-        <path d="M19 28.5a9.5 9.5 0 1 1 19 0 9.5 9.5 0 0 1-19 0z" fill="#1ABCFE"/>
-        <path d="M0 47.5A9.5 9.5 0 0 1 9.5 38H19v9.5a9.5 9.5 0 0 1-19 0z" fill="#0ACF83"/>
-        <path d="M19 0v19h9.5a9.5 9.5 0 0 0 0-19H19z" fill="#FF7262"/>
-        <path d="M0 9.5A9.5 9.5 0 0 0 9.5 19H19V0H9.5A9.5 9.5 0 0 0 0 9.5z" fill="#F24E1E"/>
-        <path d="M0 28.5A9.5 9.5 0 0 0 9.5 38H19V19H9.5A9.5 9.5 0 0 0 0 28.5z" fill="#A259FF"/>
+        <path d="M19 28.5a9.5 9.5 0 1 1 19 0 9.5 9.5 0 0 1-19 0z" fill="#1ABCFE" />
+        <path d="M0 47.5A9.5 9.5 0 0 1 9.5 38H19v9.5a9.5 9.5 0 0 1-19 0z" fill="#0ACF83" />
+        <path d="M19 0v19h9.5a9.5 9.5 0 0 0 0-19H19z" fill="#FF7262" />
+        <path d="M0 9.5A9.5 9.5 0 0 0 9.5 19H19V0H9.5A9.5 9.5 0 0 0 0 9.5z" fill="#F24E1E" />
+        <path d="M0 28.5A9.5 9.5 0 0 0 9.5 38H19V19H9.5A9.5 9.5 0 0 0 0 28.5z" fill="#A259FF" />
       </svg>
       <span className="text-[11px] font-semibold" style={{ color: 'rgba(255,255,255,0.8)' }}>portfolio-design.fig</span>
       <div className="flex gap-1 ml-2">
@@ -252,13 +252,13 @@ const FigmaCard = ({ service }: { service: typeof services[0] }) => (
       >
         {/* Ruler top */}
         <div className="absolute top-0 left-0 right-0 h-5 flex items-end px-1 gap-4" style={{ background: 'rgba(30,30,30,0.9)', borderBottom: '0.5px solid rgba(255,255,255,0.07)' }}>
-          {[0,80,160,240,320,400].map(n => (
+          {[0, 80, 160, 240, 320, 400].map(n => (
             <span key={n} className="font-mono text-[7px]" style={{ color: 'rgba(255,255,255,0.2)' }}>{n}</span>
           ))}
         </div>
         {/* Ruler left */}
         <div className="absolute top-0 left-0 bottom-0 w-5 flex flex-col items-end py-6 gap-6" style={{ background: 'rgba(30,30,30,0.9)', borderRight: '0.5px solid rgba(255,255,255,0.07)' }}>
-          {[0,50,100,150,200].map(n => (
+          {[0, 50, 100, 150, 200].map(n => (
             <span key={n} className="font-mono text-[7px] rotate-180" style={{ writingMode: 'vertical-lr', color: 'rgba(255,255,255,0.2)' }}>{n}</span>
           ))}
         </div>
@@ -268,7 +268,7 @@ const FigmaCard = ({ service }: { service: typeof services[0] }) => (
           {/* Selection outline */}
           <div className="absolute -inset-2 rounded-sm pointer-events-none" style={{ border: '1.5px solid #0d99ff', boxShadow: '0 0 0 1px rgba(13,153,255,0.15)' }}>
             {/* Corner handles */}
-            {['-top-1.5 -left-1.5','-top-1.5 -right-1.5','-bottom-1.5 -left-1.5','-bottom-1.5 -right-1.5'].map(pos => (
+            {['-top-1.5 -left-1.5', '-top-1.5 -right-1.5', '-bottom-1.5 -left-1.5', '-bottom-1.5 -right-1.5'].map(pos => (
               <div key={pos} className={`absolute ${pos} w-3 h-3 rounded-sm`} style={{ background: '#fff', border: '1.5px solid #0d99ff' }} />
             ))}
           </div>
@@ -289,7 +289,7 @@ const FigmaCard = ({ service }: { service: typeof services[0] }) => (
       {/* Right panel: inspect */}
       <div className="w-28 flex-shrink-0 p-3 flex flex-col gap-3" style={{ background: '#1e1e1e', borderLeft: '1px solid rgba(255,255,255,0.06)' }}>
         <p className="text-[9px] uppercase tracking-widest" style={{ color: 'rgba(255,255,255,0.3)' }}>Inspect</p>
-        {[['W','100%'],['H','auto'],['X','0'],['Y','0'],['R','12px'],['Opacity','100%']].map(([k,v]) => (
+        {[['W', '100%'], ['H', 'auto'], ['X', '0'], ['Y', '0'], ['R', '12px'], ['Opacity', '100%']].map(([k, v]) => (
           <div key={k} className="flex justify-between">
             <span className="text-[9px]" style={{ color: 'rgba(255,255,255,0.3)' }}>{k}</span>
             <span className="text-[9px] font-mono" style={{ color: 'rgba(255,255,255,0.6)' }}>{v}</span>

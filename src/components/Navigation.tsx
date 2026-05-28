@@ -39,7 +39,7 @@ const Navigation = () => {
   };
 
   return (
-    <div className="fixed bottom-6 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none">
+    <div className="fixed top-6 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none">
       <nav 
         className="pointer-events-auto flex items-center gap-2 p-2.5 rounded-full shadow-[0_15px_30px_rgba(0,0,0,0.4)] bg-gradient-to-b from-[#0f1112] to-[#1a1d1f] border border-white/10"
       >
