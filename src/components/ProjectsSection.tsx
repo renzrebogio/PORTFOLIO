@@ -1,17 +1,29 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { ExternalLink, Github, Calendar, Users, Zap, X, Play, Image } from 'lucide-react';
+import { Github, Users, Zap, X, Play, Image as ImageIcon } from 'lucide-react';
 import { useState } from 'react';
+import { useScrollReveal } from '@/hooks/useScrollReveal';
 
 const ProjectsSection = () => {
-  const [selectedVideo, setSelectedVideo] = useState(null);
+  const [selectedVideo, setSelectedVideo] = useState<{
+    title: string;
+    year: string;
+    description: string;
+    achievements: string[];
+    technologies: string[];
+    teamSize: string;
+    role: string;
+    thumbnail: string;
+    demoVideo: string;
+    githubUrl: string;
+  } | null>(null);
+  
+  const headerRef = useScrollReveal({ threshold: 0.2 });
 
-  // Helper function to check if URL is YouTube and convert to embed format
-  const getVideoEmbedUrl = (url) => {
+  const getVideoEmbedUrl = (url: string) => {
     if (url.includes('youtu.be/') || url.includes('youtube.com/')) {
-      // Extract video ID from different YouTube URL formats
-      let videoId;
+      let videoId = '';
       if (url.includes('youtu.be/')) {
         videoId = url.split('youtu.be/')[1].split('?')[0];
       } else if (url.includes('youtube.com/watch?v=')) {
@@ -19,10 +31,10 @@ const ProjectsSection = () => {
       }
       return `https://www.youtube.com/embed/${videoId}`;
     }
-    return url; // Return original URL for direct MP4 files
+    return url;
   };
 
-  const isYouTubeVideo = (url) => {
+  const isYouTubeVideo = (url: string) => {
     return url.includes('youtu.be/') || url.includes('youtube.com/');
   };
 
@@ -35,14 +47,14 @@ const ProjectsSection = () => {
         'Implemented full harvest → process → assembly → delivery loop',
         'Built story and time modes with per-level and overall leaderboards',
         'Added local 2-player co-op with simultaneous input handling',
-        'Created robust menu, pause, and game-over flows with controller support'
+        'Created robust menu, pause, and flows with controller support'
       ],
       technologies: ['Python', 'Pygame'],
       teamSize: 'Solo Project',
       role: 'Gameplay Developer',
       thumbnail: 'pixelbot_thumbnail.jpg',
       demoVideo: '',
-      githubUrl: 'https://github.com/yourusername/pixelbot'
+      githubUrl: 'https://github.com/renzrebogio/pixelbot'
     },
     {
       title: 'ZeeAI - Full Stack AI SaaS Web',
@@ -57,14 +69,14 @@ const ProjectsSection = () => {
       technologies: ['PostgreSQL', 'Express', 'React', 'NodeJS'],
       teamSize: 'Solo Project',
       role: 'Full-Stack Developer',
-      thumbnail: 'zeeaisaas_thumbnail.jpg', // Replace with your image URL
+      thumbnail: 'zeeaisaas_thumbnail.jpg',
       demoVideo: 'https://youtu.be/mfN3cW8A_aQ',
-      githubUrl: 'https://github.com/yourusername/ai-saas'
+      githubUrl: 'https://github.com/renzrebogio/ai-saas'
     },
     {
       title: 'Baste BookMart - Online Campus Bookstore Website',
       year: '2025',
-      description: 'Led a collaborative team in designing and developing a frontend-only online campus bookstore using HTML, CSS, and JavaScript, specifically tailored to reflect the school\'s unique branding and services.',
+      description: 'Led a collaborative team in designing and developing a campus bookstore using HTML, CSS, and JavaScript, specifically tailored to reflect the school\'s unique branding and services.',
       achievements: [
         'Designed campus-themed interface elements',
         'Implemented detailed product listings',
@@ -74,9 +86,9 @@ const ProjectsSection = () => {
       technologies: ['HTML', 'CSS', 'JavaScript'],
       teamSize: 'Team Project',
       role: 'Frontend Developer & Team Lead',
-      thumbnail: 'bastebookmart_thumbnail.jpg', // Replace with your image URL
+      thumbnail: 'bastebookmart_thumbnail.jpg',
       demoVideo: 'https://youtu.be/AvPzQJBS-GE',
-      githubUrl: 'https://github.com/yourusername/campus-bookstore'
+      githubUrl: 'https://github.com/renzrebogio/campus-bookstore'
     },
     {
       title: 'Casa Lasa - Full Stack Food Delivery',
@@ -91,9 +103,9 @@ const ProjectsSection = () => {
       technologies: ['React JS', 'MongoDB', 'Express', 'NodeJS', 'Stripe'],
       teamSize: 'Solo Project', 
       role: 'Full-Stack Developer',
-      thumbnail: 'casalasa_thumbnail.jpg', // Replace with your image URL
+      thumbnail: 'casalasa_thumbnail.jpg',
       demoVideo: '',
-      githubUrl: 'https://github.com/yourusername/food-delivery'
+      githubUrl: 'https://github.com/renzrebogio/food-delivery'
     },
     {
       title: 'Mobile Fitness Application',
@@ -107,257 +119,143 @@ const ProjectsSection = () => {
       technologies: ['Flutter', 'Dart', 'Firebase'],
       teamSize: '4 members',
       role: 'Full-Stack Developer & Team Lead',
-      thumbnail: 'mobilefitnessapp_thumbnail.jpg', // Replace with your image URL
+      thumbnail: 'mobilefitnessapp_thumbnail.jpg',
       demoVideo: 'https://youtu.be/wywp3TC-3Jg',
-      githubUrl: 'https://github.com/yourusername/fitness-app'
+      githubUrl: 'https://github.com/renzrebogio/fitness-app'
     }
   ];
 
   return (
-    <section id="projects" className="py-20">
-      <div className="container mx-auto px-6">
-        <div className="w-full max-w-[1400px] mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 text-glow">
+    <section id="projects" className="py-24 md:py-32 bg-background border-t border-border/50">
+      <div className="container mx-auto px-6 max-w-7xl">
+        <div ref={headerRef as React.RefObject<HTMLDivElement>} className="section-reveal mb-16 md:mb-24">
+          <span className="text-[#e27500] text-xs font-bold uppercase tracking-widest block mb-3">Portfolio / Work</span>
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-black font-heading tracking-tighter text-foreground">
             Featured Projects
           </h2>
+        </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-10 max-w-[1000px] mx-auto">
-            {projects.slice(0, 2).map((project, index) => (
-              <Card key={index} className="card-futuristic hover:neon-glow transition-all duration-300 animate-slide-up group overflow-hidden flex flex-col">
-                {/* Project Thumbnail */}
-                <div className="relative h-64 overflow-hidden bg-gradient-to-br from-primary/10 to-primary/5">
-                  <img
-                    src={project.thumbnail}
-                    alt={`${project.title} thumbnail`}
-                    className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-300"
-                    onError={(e) => {
-                      // Fallback if image fails to load
-                      const img = e.target as HTMLImageElement;
-                      img.style.display = 'none';
-                      if (img.nextSibling && img.nextSibling instanceof HTMLElement) {
-                        (img.nextSibling as HTMLElement).style.display = 'flex';
-                      }
-                    }}
-                  />
-                  {/* Fallback placeholder */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-primary/5 items-center justify-center hidden">
-                    <div className="text-center text-muted-foreground">
-                      <Image size={48} className="mx-auto mb-2 opacity-50" />
-                      <p className="text-sm font-medium">{project.title}</p>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          {projects.map((project, index) => {
+            const cardRef = useScrollReveal({ threshold: 0.1, delay: index * 100 });
+            return (
+              <div key={index} ref={cardRef as React.RefObject<HTMLDivElement>} className="section-reveal">
+                <Card className="rounded-[2.5rem] bg-card border border-border/40 overflow-hidden flex flex-col h-full hover:border-[#e27500]/30 transition-all duration-500 shadow-sm group">
+                  {/* Project Thumbnail */}
+                  <div className="relative aspect-[16/10] overflow-hidden bg-background">
+                    <img
+                      src={project.thumbnail}
+                      alt={`${project.title} thumbnail`}
+                      className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                      onError={(e) => {
+                        const img = e.target as HTMLImageElement;
+                        img.style.display = 'none';
+                        if (img.nextSibling && img.nextSibling instanceof HTMLElement) {
+                          (img.nextSibling as HTMLElement).style.display = 'flex';
+                        }
+                      }}
+                    />
+                    {/* Fallback placeholder */}
+                    <div className="absolute inset-0 bg-muted items-center justify-center hidden">
+                      <div className="text-center text-muted-foreground">
+                        <ImageIcon size={40} className="mx-auto mb-2 opacity-40 text-[#e27500]" />
+                        <p className="text-xs font-bold uppercase tracking-widest">{project.title}</p>
+                      </div>
                     </div>
+                    {/* Gradient Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-background/30 to-transparent"></div>
+                    
+                    {/* Project Year overlay */}
+                    <span className="absolute top-6 right-6 font-bold text-xs uppercase tracking-widest px-3.5 py-1.5 rounded-full bg-background/80 border border-border/50 text-foreground backdrop-blur-md">
+                      {project.year}
+                    </span>
                   </div>
-                  {/* Overlay gradient */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent"></div>
-                  {/* Project year badge overlay */}
-                  <Badge 
-                    variant="outline" 
-                    className="absolute top-3 right-3 border-primary/40 text-primary bg-background/90 backdrop-blur-sm px-3 py-1 text-base font-semibold"
-                  >
-                    {project.year}
-                  </Badge>
-                </div>
 
-                <CardHeader className="pb-4">
-                  <CardTitle className="text-2xl font-bold group-hover:text-primary transition-colors">
-                    {project.title}
-                  </CardTitle>
-                  
-                  <div className="flex items-center gap-4 text-base text-muted-foreground">
-                    <div className="flex items-center gap-2">
-                      <Users size={18} />
-                      <span>{project.teamSize}</span>
+                  <CardHeader className="p-8 pb-4">
+                    <CardTitle className="text-2xl sm:text-3xl font-bold font-heading text-foreground group-hover:text-[#e27500] transition-colors duration-300">
+                      {project.title}
+                    </CardTitle>
+                    
+                    <div className="flex flex-wrap items-center gap-4 text-xs font-semibold uppercase tracking-wider text-muted-foreground mt-2">
+                      <div className="flex items-center gap-1.5">
+                        <Users size={14} className="text-[#e27500]" />
+                        <span>{project.teamSize}</span>
+                      </div>
+                      <div className="flex items-center gap-1.5">
+                        <Zap size={14} className="text-[#e27500]" />
+                        <span>{project.role}</span>
+                      </div>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <Zap size={18} />
-                      <span>{project.role}</span>
-                    </div>
-                  </div>
-                </CardHeader>
+                  </CardHeader>
 
-                <CardContent className="flex-1 flex flex-col pt-0">
-                  <div className="flex-1 space-y-4">
-                    <p className="text-muted-foreground leading-relaxed text-base">
-                      {project.description}
-                    </p>
+                  <CardContent className="p-8 pt-0 flex-1 flex flex-col justify-between">
+                    <div className="space-y-6 flex-1 mb-8">
+                      <p className="text-muted-foreground leading-relaxed text-sm sm:text-base font-medium">
+                        {project.description}
+                      </p>
 
-                    <div>
-                      <h4 className="font-semibold mb-2 text-primary text-lg">Key Achievements:</h4>
-                      <ul className="space-y-1">
-                        {project.achievements.map((achievement, achIndex) => (
-                          <li key={achIndex} className="text-base text-muted-foreground flex items-start gap-2">
-                            <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                            {achievement}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
+                      <div>
+                        <h4 className="font-bold text-xs uppercase tracking-wider text-foreground mb-3">Key Achievements</h4>
+                        <ul className="space-y-2">
+                          {project.achievements.map((achievement, achIndex) => (
+                            <li key={achIndex} className="text-xs sm:text-sm text-muted-foreground flex items-start gap-2.5">
+                              <span className="w-1.5 h-1.5 bg-[#e27500] rounded-full mt-1.5 flex-shrink-0"></span>
+                              <span className="font-medium">{achievement}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
 
-                    <div>
-                      <h4 className="font-semibold mb-3 text-primary text-lg">Technologies Used:</h4>
-                      <div className="flex flex-wrap gap-2">
+                      <div className="flex flex-wrap gap-1.5">
                         {project.technologies.map((tech, techIndex) => (
                           <Badge 
                             key={techIndex}
                             variant="secondary"
-                            className="bg-primary/10 text-primary border-primary/20 text-sm px-3 py-1"
+                            className="bg-background text-foreground border border-border/50 text-xs font-semibold px-2.5 py-1"
                           >
                             {tech}
                           </Badge>
                         ))}
                       </div>
                     </div>
-                  </div>
 
-                  <div className="flex gap-3 mt-6 pt-4 border-t border-primary/10">
-                    <Button 
-                      variant="outline" 
-                      size="default" 
-                      className="border-primary/40 text-primary hover:bg-primary/10"
-                      onClick={() => window.open(project.githubUrl, '_blank')}
-                    >
-                      <Github size={18} className="mr-2" />
-                      Code
-                    </Button>
-                    <Button 
-                      size="default" 
-                      className="neon-glow"
-                      onClick={() => setSelectedVideo(project)}
-                    >
-                      <Play size={18} className="mr-2" />
-                      Demo
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-
-          {/* Second row - 2 projects centered */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-[1000px] mx-auto mt-10">
-            {projects.slice(2).map((project, index) => (
-              <Card key={index + 2} className="card-futuristic hover:neon-glow transition-all duration-300 animate-slide-up group overflow-hidden flex flex-col">
-                {/* Project Thumbnail */}
-                <div className="relative h-64 overflow-hidden bg-gradient-to-br from-primary/10 to-primary/5">
-                  <img
-                    src={project.thumbnail}
-                    alt={`${project.title} thumbnail`}
-                    className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-300"
-                    onError={(e) => {
-                      // Fallback if image fails to load
-                      const img = e.target as HTMLImageElement;
-                      img.style.display = 'none';
-                      if (img.nextSibling && img.nextSibling instanceof HTMLElement) {
-                        (img.nextSibling as HTMLElement).style.display = 'flex';
-                      }
-                    }}
-                  />
-                  {/* Fallback placeholder */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-primary/5 items-center justify-center hidden">
-                    <div className="text-center text-muted-foreground">
-                      <Image size={48} className="mx-auto mb-2 opacity-50" />
-                      <p className="text-sm font-medium">{project.title}</p>
+                    <div className="flex gap-4 border-t border-border/50 pt-6">
+                      <Button 
+                        variant="outline" 
+                        className="flex-1 border-border/60 hover:border-foreground text-foreground rounded-full transition-all duration-300 font-bold text-xs uppercase tracking-wider h-11"
+                        onClick={() => window.open(project.githubUrl, '_blank')}
+                      >
+                        <Github size={16} className="mr-2" />
+                        Code Repository
+                      </Button>
+                      <Button 
+                        className="flex-1 bg-[#e27500] hover:bg-[#ff8800] text-white rounded-full transition-all duration-300 font-bold text-xs uppercase tracking-wider h-11"
+                        onClick={() => setSelectedVideo(project)}
+                      >
+                        <Play size={16} className="mr-2" />
+                        Watch Demo
+                      </Button>
                     </div>
-                  </div>
-                  {/* Overlay gradient */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent"></div>
-                  {/* Project year badge overlay */}
-                  <Badge 
-                    variant="outline" 
-                    className="absolute top-3 right-3 border-primary/40 text-primary bg-background/90 backdrop-blur-sm px-3 py-1 text-base font-semibold"
-                  >
-                    {project.year}
-                  </Badge>
-                </div>
-
-                <CardHeader className="pb-4">
-                  <CardTitle className="text-2xl font-bold group-hover:text-primary transition-colors">
-                    {project.title}
-                  </CardTitle>
-                  
-                  <div className="flex items-center gap-4 text-base text-muted-foreground">
-                    <div className="flex items-center gap-2">
-                      <Users size={18} />
-                      <span>{project.teamSize}</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Zap size={18} />
-                      <span>{project.role}</span>
-                    </div>
-                  </div>
-                </CardHeader>
-
-                <CardContent className="flex-1 flex flex-col pt-0">
-                  <div className="flex-1 space-y-4">
-                    <p className="text-muted-foreground leading-relaxed text-base">
-                      {project.description}
-                    </p>
-
-                    <div>
-                      <h4 className="font-semibold mb-2 text-primary text-lg">Key Achievements:</h4>
-                      <ul className="space-y-1">
-                        {project.achievements.map((achievement, achIndex) => (
-                          <li key={achIndex} className="text-base text-muted-foreground flex items-start gap-2">
-                            <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                            {achievement}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    <div>
-                      <h4 className="font-semibold mb-3 text-primary text-lg">Technologies Used:</h4>
-                      <div className="flex flex-wrap gap-2">
-                        {project.technologies.map((tech, techIndex) => (
-                          <Badge 
-                            key={techIndex}
-                            variant="secondary"
-                            className="bg-primary/10 text-primary border-primary/20 text-sm px-3 py-1"
-                          >
-                            {tech}
-                          </Badge>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="flex gap-3 mt-6 pt-4 border-t border-primary/10">
-                    <Button 
-                      variant="outline" 
-                      size="default" 
-                      className="border-primary/40 text-primary hover:bg-primary/10"
-                      onClick={() => window.open(project.githubUrl, '_blank')}
-                    >
-                      <Github size={18} className="mr-2" />
-                      Code
-                    </Button>
-                    <Button 
-                      size="default" 
-                      className="neon-glow"
-                      onClick={() => setSelectedVideo(project)}
-                    >
-                      <Play size={18} className="mr-2" />
-                      Demo
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+                  </CardContent>
+                </Card>
+              </div>
+            );
+          })}
         </div>
       </div>
 
       {/* Video Modal */}
       {selectedVideo && (
         <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="relative max-w-4xl w-full max-h-[90vh] bg-background rounded-lg overflow-hidden border border-primary/20">
+          <div className="relative max-w-4xl w-full bg-card rounded-[2.5rem] overflow-hidden border border-border/40 shadow-2xl">
             {/* Modal Header */}
-            <div className="flex items-center justify-between p-4 border-b border-primary/20">
-              <h3 className="text-xl font-bold text-primary">{selectedVideo.title} - Demo</h3>
+            <div className="flex items-center justify-between p-6 border-b border-border/40 bg-card">
+              <h3 className="text-xl font-bold font-heading text-foreground">{selectedVideo.title} <span className="text-[#e27500] font-normal">/ Project Demo</span></h3>
               <Button
                 variant="ghost"
-                size="sm"
+                size="icon"
                 onClick={() => setSelectedVideo(null)}
-                className="hover:bg-primary/10"
+                className="hover:bg-background hover:text-[#e27500] rounded-full transition-colors border border-border/40"
               >
                 <X size={20} />
               </Button>
@@ -381,7 +279,6 @@ const ProjectsSection = () => {
                     autoPlay
                     muted
                     className="w-full h-full object-contain"
-                    poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23000'/%3E%3Ctext x='50' y='50' text-anchor='middle' dy='.3em' fill='%23666'%3ELoading...%3C/text%3E%3C/svg%3E"
                   >
                     <source src={selectedVideo.demoVideo} type="video/mp4" />
                     Your browser does not support the video tag.
@@ -390,22 +287,25 @@ const ProjectsSection = () => {
               ) : (
                 <div className="flex h-full items-center justify-center p-6 text-center">
                   <div>
-                    <p className="text-lg font-semibold text-primary">Demo unavailable</p>
-                    <p className="text-sm text-muted-foreground mt-2">No demo video is currently available for this project.</p>
+                    <div className="w-16 h-16 bg-background border border-border/40 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <Play className="w-6 h-6 text-muted-foreground" />
+                    </div>
+                    <p className="text-lg font-semibold text-foreground">Video Demo Unavailable</p>
+                    <p className="text-sm text-muted-foreground mt-2">There is no video demo recorded for this project yet.</p>
                   </div>
                 </div>
               )}
             </div>
             
             {/* Video Description */}
-            <div className="p-4 space-y-2">
-              <p className="text-sm text-muted-foreground">{selectedVideo.description}</p>
-              <div className="flex flex-wrap gap-2">
+            <div className="p-6 bg-background/50 border-t border-border/40 space-y-4">
+              <p className="text-sm text-muted-foreground font-medium leading-relaxed">{selectedVideo.description}</p>
+              <div className="flex flex-wrap gap-1.5">
                 {selectedVideo.technologies.map((tech, index) => (
                   <Badge 
                     key={index}
                     variant="secondary"
-                    className="bg-primary/10 text-primary border-primary/20"
+                    className="bg-card text-foreground border border-border/50 text-xs font-semibold px-2.5 py-1"
                   >
                     {tech}
                   </Badge>

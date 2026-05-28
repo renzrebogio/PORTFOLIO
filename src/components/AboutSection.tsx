@@ -1,152 +1,375 @@
 import { useState } from 'react';
-import { Card, CardContent } from '@/components/ui/card';
-import { GraduationCap, MapPin, Mail, Linkedin, Award, Eye, X, User, Github } from 'lucide-react';
+import { Eye, X, Github, Linkedin, Mail, MapPin, Cpu, Award } from 'lucide-react';
+import { useScrollReveal } from '@/hooks/useScrollReveal';
+import { motion } from 'framer-motion';
 
+/* ── PCB Chip Pin Decorations ───────────────────────────────────────── */
+const ChipPins = () => (
+  <>
+    <div className="pcb-chip-pin-container-left">
+      <div className="pcb-chip-pin" />
+      <div className="pcb-chip-pin" />
+      <div className="pcb-chip-pin" />
+      <div className="pcb-chip-pin" />
+      <div className="pcb-chip-pin" />
+    </div>
+    <div className="pcb-chip-pin-container-right">
+      <div className="pcb-chip-pin" />
+      <div className="pcb-chip-pin" />
+      <div className="pcb-chip-pin" />
+      <div className="pcb-chip-pin" />
+      <div className="pcb-chip-pin" />
+    </div>
+  </>
+);
+
+/* ── Data ──────────────────────────────────────────────────────────── */
+const timelineEntries = [
+  {
+    year: '2022 - 2026',
+    title: 'BS in Computer Engineering',
+    subtitle: 'San Sebastian College – Recoletos de Cavite',
+    highlight: "Dean's Lister",
+    active: true,
+  },
+];
+
+const certificates = [
+  {
+    id: 1,
+    title: 'Introduction to Frontend Development',
+    issuer: 'Simplilearn',
+    year: '2025',
+    image: '/E-Certificate (Introduction to Frontend Development).jpg',
+  },
+];
+
+/* ── Main component ────────────────────────────────────────────────── */
 const AboutSection = () => {
-  const [selectedCertificate, setSelectedCertificate] = useState(null);
+  const [selectedCertificate, setSelectedCertificate] = useState<typeof certificates[0] | null>(null);
+  const headerRef = useScrollReveal({ threshold: 0.2 });
 
-  const certificates = [
-    {
-      id: 1,
-      title: "Introduction to Frontend Development",
-      issuer: "Simplilearn",
-      year: "2025",
-      image: "/E-Certificate (Introduction to Frontend Development).jpg" // Replace with your actual certificate image path
+  // Framer Motion Variants for Staggered PCB Entrance
+  const containerVariants = {
+    hidden: { opacity: 0, y: 40 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: {
+        duration: 0.8,
+        ease: [0.16, 1, 0.3, 1] as any,
+        staggerChildren: 0.15
+      }
     }
-  ];
-
-  const openCertificate = (cert) => {
-    setSelectedCertificate(cert);
   };
 
-  const closeCertificate = () => {
-    setSelectedCertificate(null);
+  const chipVariants = {
+    hidden: { opacity: 0, y: 30, scale: 0.98 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      scale: 1,
+      transition: {
+        duration: 0.6,
+        ease: [0.16, 1, 0.3, 1] as any
+      }
+    }
   };
 
   return (
-    <section id="about" className="py-20">
-      <div className="container mx-auto px-6">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 text-glow">
-            About Me
+    <section id="about" className="py-24 md:py-32 bg-section-bg dashboard-dot-grid border-t border-border/50">
+      <div className="container mx-auto px-6 max-w-7xl">
+
+        {/* ── Section header ──────────────────────────────────── */}
+        <div ref={headerRef as React.RefObject<HTMLDivElement>} className="section-reveal mb-16 md:mb-24">
+          <span className="text-[#e27500] text-xs font-bold uppercase tracking-widest block mb-3">About me</span>
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-black font-heading tracking-tighter text-foreground">
+            My Journey
           </h2>
-          
-          <div className="grid md:grid-cols-2 gap-8">
-            {/* Profile Card */}
-            <Card className="card-futuristic hover:neon-glow transition-all duration-300 animate-slide-up group h-full">
-              <CardContent className="p-8">
-                <h3 className="text-2xl font-bold mb-6 text-primary flex items-center gap-2">
-                  <User className="text-primary" size={24} />
-                  Profile
-                </h3>
-                <p className="text-muted-foreground leading-relaxed mb-6 text-justify">
-                  Computer Engineering student and aspiring web developer skilled in HTML, CSS, 
-                  JavaScript, and React. Experienced in frontend and backend technologies with 
-                  a focus on creating responsive, accessible interfaces. Thrives in collaborative environments that develop projects with real-world impact.
-                </p>
-              </CardContent>
-            </Card>
+        </div>
 
-            {/* Education & Contact Card */}
-            <Card className="card-futuristic hover:neon-glow transition-all duration-300 animate-slide-up group h-full">
-              <CardContent className="p-8">
-                <h3 className="text-2xl font-bold mb-6 text-primary flex items-center gap-2">
-                  <GraduationCap className="text-primary" size={24} />
-                  Education & Contact
-                </h3>
+        {/* ── Dashboard grid ──────────────────────────────────── */}
+        <div className="lg:grid lg:grid-cols-12 lg:gap-8">
+          <div className="lg:col-span-7 xl:col-span-7">
+            
+            {/* ── Unified PCB Container ────────────────────────── */}
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              variants={containerVariants}
+              className="pcb-board p-6 sm:p-8 md:p-10 flex flex-col gap-8 relative"
+            >
+              {/* Mounting Holes */}
+              <div className="pcb-mounting-hole top-left" />
+              <div className="pcb-mounting-hole top-right" />
+              <div className="pcb-mounting-hole bottom-left" />
+              <div className="pcb-mounting-hole bottom-right" />
+
+              {/* Responsive Circuit Traces on left/right borders */}
+              <div className="absolute left-3 top-10 bottom-10 w-6 pointer-events-none opacity-25 dark:opacity-40 select-none">
+                <svg className="w-full h-full" viewBox="0 0 24 800" preserveAspectRatio="none">
+                  <path d="M 12,0 L 12,200 L 2,215 L 2,450 L 22,475 L 22,800" fill="none" className="pcb-trace-line" />
+                  <path d="M 12,0 L 12,200 L 2,215 L 2,450 L 22,475 L 22,800" fill="none" className="pcb-trace-pulse" />
+                </svg>
+              </div>
+              <div className="absolute right-3 top-10 bottom-10 w-6 pointer-events-none opacity-25 dark:opacity-40 select-none">
+                <svg className="w-full h-full" viewBox="0 0 24 800" preserveAspectRatio="none">
+                  <path d="M 12,0 L 12,150 L 22,165 L 22,500 L 2,525 L 2,800" fill="none" className="pcb-trace-line" />
+                  <path d="M 12,0 L 12,150 L 22,165 L 22,500 L 2,525 L 2,800" fill="none" className="pcb-trace-pulse" />
+                </svg>
+              </div>
+
+              {/* PCB Silkscreen Annotations & Decorative Elements */}
+              <div className="absolute top-4 left-10 sm:left-12 pcb-silkscreen font-mono text-[8px] sm:text-[9px]">
+                MAIN_BOARD // COMP_ENG_REV_2.0 // DEPT: ABOUT_ME
+              </div>
+              <div className="absolute top-4 right-10 sm:right-12 pcb-silkscreen font-mono text-[8px] sm:text-[9px] flex items-center gap-1.5">
+                <span className="pcb-test-point pulse" style={{ width: 6, height: 6 }} />
+                STATUS: ACTIVE
+              </div>
+              <div className="absolute bottom-4 left-10 sm:left-12 pcb-silkscreen font-mono text-[7px] sm:text-[8px]">
+                R12 C44 L8 Q3 // GND VCC TX RX
+              </div>
+              <div className="absolute bottom-4 right-10 sm:right-12 pcb-silkscreen font-mono text-[7px] sm:text-[8px]">
+                MADE_IN_PH // SYSTEM_ACTIVE
+              </div>
+
+              {/* Unified Contents with vertical spacing */}
+              <div className="relative z-10 space-y-6 sm:space-y-8 py-4 px-2 sm:px-4">
                 
-                <div className="space-y-4 mb-6">
-                  <div className="flex items-start gap-3">
-                    <div>
-                      <p className="font-semibold">Bachelor of Science in Computer Engineering</p>
-                      <p className="text-sm text-muted-foreground">San Sebastian College – Recoletos de Cavite</p>
-                      <p className="text-sm text-muted-foreground">Expected Graduation: 2026 | Dean's Lister</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="space-y-3">
-                  <div className="flex items-center gap-3">
-                    <MapPin className="text-primary flex-shrink-0" size={18} />
-                    <span className="text-sm">Cavite City, Cavite</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <Mail className="text-primary flex-shrink-0" size={18} />
-                    <span className="text-sm">renzmartinrebogio@gmail.com</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <Linkedin className="text-primary flex-shrink-0" size={18} />
-                    <span className="text-sm">Renz Martin Rebogio</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <Github className="text-primary flex-shrink-0" size={18} />
-                    <span className="text-sm">renzrebogio</span>
+                {/* ── Section 1: Profile ──────────────────────── */}
+                <motion.div variants={chipVariants} className="pcb-chip">
+                  <ChipPins />
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="font-mono text-xs sm:text-sm font-bold uppercase tracking-widest flex items-center gap-2" style={{ color: '#e27500' }}>
+                      <Cpu size={16} />
+                      <span>U1 // Profile</span>
+                    </h3>
+                    <span className="font-mono text-[8px] sm:text-[9px] text-[#e27500]/60 uppercase tracking-widest hidden sm:inline">
+                      8-Bit MCU
+                    </span>
                   </div>
                   
-                </div>
-              </CardContent>
-            </Card>
+                  <p className="text-sm md:text-base leading-relaxed text-white/70 mb-6">
+                    Full-stack developer and UI/UX designer with a BS in Computer Engineering.
+                    I build performant, scalable web and mobile applications from the ground up —
+                    from database architecture and RESTful APIs to polished, accessible frontends.
+                    I thrive in fast-paced, collaborative environments where engineering meets design.
+                  </p>
+
+                  {/* Location & Social Row */}
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-4 border-t border-white/5">
+                    <div className="flex items-center gap-2 text-white/50 font-mono text-[11px]">
+                      <MapPin size={12} className="text-[#e27500]" />
+                      <span>LOCATION:</span>
+                      <span className="text-white/80">Cavite, PH</span>
+                    </div>
+                    
+                    {/* Social media links with brand logos */}
+                    <div className="flex items-center gap-3">
+                      <span className="font-mono text-[9px] text-white/30 uppercase tracking-widest mr-1">socials:</span>
+                      
+                      <a
+                        href="https://github.com/renzrebogio"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-8 h-8 rounded-full flex items-center justify-center border border-white/10 text-white/60 hover:text-[#e27500] hover:border-[#e27500] hover:bg-[#e27500]/5 transition-all duration-300 hover:shadow-[0_0_10px_rgba(226,117,0,0.15)] group"
+                        title="GitHub"
+                      >
+                        <Github size={16} className="group-hover:scale-110 transition-transform duration-300" />
+                      </a>
+
+                      <a
+                        href="https://linkedin.com/in/renz-martin-rebogio-3916ab364"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-8 h-8 rounded-full flex items-center justify-center border border-white/10 text-white/60 hover:text-[#e27500] hover:border-[#e27500] hover:bg-[#e27500]/5 transition-all duration-300 hover:shadow-[0_0_10px_rgba(226,117,0,0.15)] group"
+                        title="LinkedIn"
+                      >
+                        <Linkedin size={16} className="group-hover:scale-110 transition-transform duration-300" />
+                      </a>
+
+                      <a
+                        href="mailto:renzmartinrebogio@gmail.com"
+                        className="w-8 h-8 rounded-full flex items-center justify-center border border-white/10 text-white/60 hover:text-[#e27500] hover:border-[#e27500] hover:bg-[#e27500]/5 transition-all duration-300 hover:shadow-[0_0_10px_rgba(226,117,0,0.15)] group"
+                        title="Email"
+                      >
+                        <Mail size={16} className="group-hover:scale-110 transition-transform duration-300" />
+                      </a>
+                    </div>
+                  </div>
+                </motion.div>
+
+                {/* ── Section 2: Education ────────────────────── */}
+                <motion.div variants={chipVariants} className="pcb-chip">
+                  <ChipPins />
+                  <div className="flex items-center justify-between mb-6">
+                    <h3 className="font-mono text-xs sm:text-sm font-bold uppercase tracking-widest flex items-center gap-2" style={{ color: '#e27500' }}>
+                      <Award size={16} />
+                      <span>U2 // Education</span>
+                    </h3>
+                    <span className="font-mono text-[8px] sm:text-[9px] text-[#e27500]/60 uppercase tracking-widest hidden sm:inline">
+                      ROM_MODULE
+                    </span>
+                  </div>
+
+                  <div className="relative pl-8">
+                    {/* PCB trace timeline connector */}
+                    <div className="absolute left-[7px] top-2 bottom-2 bg-gradient-to-b from-[#e27500]/60 to-[#e27500]/10"
+                         style={{ width: '2px' }} />
+
+                    <div className="space-y-6">
+                      {timelineEntries.map((entry, i) => (
+                        <div key={i} className="relative flex items-start gap-4">
+                          {/* Solder point terminal dot */}
+                          <div className="absolute left-[-29px] top-1 w-[12px] h-[12px] rounded-full bg-[#e27500] border-2 border-white/20 shadow-[0_0_6px_rgba(226,117,0,0.6)]" />
+
+                          <div>
+                            <span className="font-mono text-[11px] font-bold tracking-wider block mb-1 text-[#e27500]">
+                              {entry.year}
+                            </span>
+                            <h4 className="text-base font-bold text-white/90 leading-snug">{entry.title}</h4>
+                            <p className="font-mono text-[11px] mt-0.5 text-white/50">
+                              {entry.subtitle}
+                            </p>
+                            {entry.highlight && (
+                              <span className="inline-block mt-2.5 text-[10px] font-bold uppercase tracking-widest px-2.5 py-0.5 rounded-full"
+                                style={{ background: 'rgba(226, 117, 0, 0.12)', color: '#e27500', border: '0.5px solid rgba(226, 117, 0, 0.25)' }}>
+                                {entry.highlight}
+                              </span>
+                            )}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </motion.div>
+
+                {/* ── Section 3: Certifications ───────────────── */}
+                <motion.div variants={chipVariants} className="pcb-chip">
+                  <ChipPins />
+                  <div className="flex items-center justify-between mb-5">
+                    <h3 className="font-mono text-xs sm:text-sm font-bold uppercase tracking-widest flex items-center gap-2" style={{ color: '#e27500' }}>
+                      <Award size={16} />
+                      <span>U3 // Certifications</span>
+                    </h3>
+                    <span className="font-mono text-[8px] sm:text-[9px] text-[#e27500]/60 uppercase tracking-widest hidden sm:inline">
+                      EEPROM_BLOCK
+                    </span>
+                  </div>
+
+                  <div className="space-y-3">
+                    {certificates.map((cert) => (
+                      <div
+                        key={cert.id}
+                        className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 p-4 rounded-xl transition-all duration-300"
+                        style={{
+                          background: 'rgba(255, 255, 255, 0.02)',
+                          border: '0.5px solid rgba(255, 255, 255, 0.05)',
+                        }}
+                      >
+                        <div className="flex items-center gap-3">
+                          {/* Verified checkmark badge styled as solder terminal */}
+                          <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0"
+                            style={{ background: 'rgba(34, 197, 94, 0.12)', border: '1px solid rgba(34, 197, 94, 0.3)' }}>
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#22c55e" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                              <polyline points="20 6 9 17 4 12" />
+                            </svg>
+                          </div>
+                          <div>
+                            <h4 className="text-sm font-bold text-white/85 leading-snug">{cert.title}</h4>
+                            <p className="font-mono text-[10px] uppercase tracking-wider text-white/40">
+                              {cert.issuer} • {cert.year}
+                            </p>
+                          </div>
+                        </div>
+                        
+                        <button
+                          onClick={() => setSelectedCertificate(cert)}
+                          className="self-start sm:self-center flex items-center gap-2 px-4 py-2 rounded-full transition-all duration-300 text-[10px] font-bold uppercase tracking-widest group"
+                          style={{
+                            background: 'transparent',
+                            border: '1px solid rgba(226, 117, 0, 0.3)',
+                            color: '#e27500',
+                          }}
+                          onMouseEnter={(e) => {
+                            (e.currentTarget as HTMLButtonElement).style.background = 'rgba(226, 117, 0, 0.1)';
+                            (e.currentTarget as HTMLButtonElement).style.borderColor = 'rgba(226, 117, 0, 0.6)';
+                            (e.currentTarget as HTMLButtonElement).style.boxShadow = '0 0 10px rgba(226, 117, 0, 0.2)';
+                          }}
+                          onMouseLeave={(e) => {
+                            (e.currentTarget as HTMLButtonElement).style.background = 'transparent';
+                            (e.currentTarget as HTMLButtonElement).style.borderColor = 'rgba(226, 117, 0, 0.3)';
+                            (e.currentTarget as HTMLButtonElement).style.boxShadow = 'none';
+                          }}
+                        >
+                          <Eye size={12} />
+                          View
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </motion.div>
+
+              </div>
+            </motion.div>
+
           </div>
 
-          {/* Certifications Card - Full Width */}
-          <Card className="card-futuristic hover:neon-glow transition-all duration-300 animate-slide-up group h-full mt-8">
-            <CardContent className="p-8">
-              <h3 className="text-2xl font-bold mb-6 text-primary flex items-center gap-2">
-                <Award className="text-primary" size={24} />
-                Certifications
-              </h3>
-              
-              <div className="space-y-4">
-                {certificates.map((cert) => (
-                  <div key={cert.id} className="flex items-center justify-between p-4 rounded-lg border border-border/50 hover:border-primary/50 transition-colors">
-                    <div className="flex-1">
-                      <h4 className="font-semibold text-foreground">{cert.title}</h4>
-                      <p className="text-sm text-muted-foreground">{cert.issuer} • {cert.year}</p>
-                    </div>
-                    <button
-                      onClick={() => openCertificate(cert)}
-                      className="flex items-center gap-2 px-4 py-2 bg-primary/10 hover:bg-primary/20 text-primary rounded-lg transition-colors"
-                    >
-                      <Eye size={16} />
-                      View
-                    </button>
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
+          {/* Right side — empty space for the sticky image card on desktop */}
+          <div className="hidden lg:block lg:col-span-5 xl:col-span-5" aria-hidden="true" />
         </div>
       </div>
 
-      {/* Certificate Modal */}
+      {/* ── Certificate Modal ────────────────────────────────── */}
       {selectedCertificate && (
-        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="relative max-w-4xl max-h-[90vh] w-full">
-            <div className="bg-background rounded-lg p-6 max-h-[90vh] overflow-auto relative">
+        <div className="fixed inset-0 z-[60] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
+          onClick={() => setSelectedCertificate(null)}>
+          <div className="relative max-w-4xl max-h-[90vh] w-full" onClick={(e) => e.stopPropagation()}>
+            <div className="pcb-board p-6 md:p-8 max-h-[90vh] overflow-auto relative">
+              <div className="pcb-mounting-hole top-left" />
+              <div className="pcb-mounting-hole top-right" />
+              <div className="pcb-mounting-hole bottom-left" />
+              <div className="pcb-mounting-hole bottom-right" />
+              
               <button
-                onClick={closeCertificate}
-                className="absolute top-4 right-4 text-muted-foreground hover:text-primary transition-colors z-10"
+                onClick={() => setSelectedCertificate(null)}
+                className="absolute top-5 right-5 z-20 p-2 rounded-full transition-colors hover:bg-white/10"
+                style={{ color: 'rgba(255,255,255,0.5)' }}
               >
-                <X size={24} />
+                <X size={18} />
               </button>
-              <div className="mb-4 pr-10">
-                <h3 className="text-xl font-bold text-foreground">{selectedCertificate.title}</h3>
-                <p className="text-muted-foreground">{selectedCertificate.issuer} • {selectedCertificate.year}</p>
-              </div>
-              <div className="flex justify-center">
-                <img
-                  src={selectedCertificate.image}
-                  alt={`${selectedCertificate.title} Certificate`}
-                  className="max-w-full h-auto rounded-lg shadow-lg"
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    const fallback = target.nextSibling as HTMLElement;
-                    target.style.display = 'none';
-                    if (fallback) fallback.style.display = 'flex';
-                  }}
-                />
-                <div className="hidden w-full h-64 bg-muted rounded-lg items-center justify-center">
-                  <p className="text-muted-foreground">Certificate image not found</p>
+              <div className="relative z-10">
+                <div className="mb-6 pr-12">
+                  <h3 className="font-mono text-xs sm:text-sm font-bold uppercase tracking-widest flex items-center gap-2 mb-2" style={{ color: '#e27500' }}>
+                    <Cpu size={16} />
+                    <span>PORT_01 // CERTIFICATE_READER</span>
+                  </h3>
+                  <h3 className="text-xl font-bold text-white/90 mb-1">{selectedCertificate.title}</h3>
+                  <p className="font-mono text-[11px] uppercase tracking-wider text-white/40">
+                    {selectedCertificate.issuer} • {selectedCertificate.year}
+                  </p>
+                </div>
+                <div className="flex justify-center rounded-xl overflow-hidden p-2"
+                  style={{ background: 'rgba(255,255,255,0.02)', border: '0.5px solid rgba(255,255,255,0.05)' }}>
+                  <img
+                    src={selectedCertificate.image}
+                    alt={`${selectedCertificate.title} Certificate`}
+                    className="max-w-full h-auto rounded-lg"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      const fallback = target.nextSibling as HTMLElement;
+                      target.style.display = 'none';
+                      if (fallback) fallback.style.display = 'flex';
+                    }}
+                  />
+                  <div className="hidden w-full h-64 rounded-lg items-center justify-center"
+                    style={{ background: 'rgba(255,255,255,0.02)' }}>
+                    <p className="font-mono text-sm text-white/30">
+                      Certificate image not found
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>

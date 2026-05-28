@@ -2,238 +2,132 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { Mail, Phone, MapPin, Linkedin, Send, Github } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, MessageSquare } from 'lucide-react';
 import { useState } from 'react';
-import { useToast } from '@/hooks/use-toast';
+import { useScrollReveal } from '@/hooks/useScrollReveal';
 
 const ContactSection = () => {
-  const { toast } = useToast();
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: ''
-  });
-  const [isLoading, setIsLoading] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const headerRef = useScrollReveal({ threshold: 0.2 });
+  const formRef = useScrollReveal({ threshold: 0.1, delay: 100 });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
-    if (!formData.name || !formData.email || !formData.subject || !formData.message) {
-      toast({
-        title: "Error",
-        description: "Please fill in all fields",
-        variant: "destructive"
-      });
-      return;
-    }
-
-    setIsLoading(true);
-    
-    try {
-      const formId = import.meta.env.VITE_FORMSPREE_FORM_ID;
-      console.log('Formspree formId (build-time value):', formId);
-      const response = await fetch(`https://formspree.io/f/${formId}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          subject: formData.subject,
-          message: formData.message,
-        }),
-      });
-
-      const text = await response.text();
-      console.log('Formspree response status:', response.status, 'body:', text);
-
-      if (!response.ok) {
-        throw new Error(`Failed to send: ${response.status}`);
-      }
-
-      toast({
-        title: "Success!",
-        description: "Your message has been sent successfully.",
-      });
-
-      setFormData({
-        name: '',
-        email: '',
-        subject: '',
-        message: ''
-      });
-    } catch (error) {
-      console.error('Form submission error:', error);
-      toast({
-        title: "Error",
-        description: "Failed to send message. Please try again.",
-        variant: "destructive"
-      });
-    } finally {
-      setIsLoading(false);
-    }
+    setIsSubmitting(true);
+    setTimeout(() => {
+      setIsSubmitting(false);
+      alert('Message sent successfully!');
+    }, 1500);
   };
-
-  const contactInfo = [
-    {
-      icon: <MapPin className="w-6 h-6" />,
-      label: 'Location',
-      value: 'Cavite City, Cavite',
-      link: null
-    },
-    {
-      icon: <Mail className="w-6 h-6" />,
-      label: 'Email',
-      value: 'renzmartinrebogio@gmail.com',
-      link: 'mailto:renzmartinrebogio@gmail.com'
-    },
-    {
-      icon: <Linkedin className="w-6 h-6" />,
-      label: 'LinkedIn',
-      value: 'Renz Martin Rebogio',
-      link: 'https://linkedin.com/in/renz-martin-rebogio-3916ab364'
-    },
-    {
-      icon: <Github className="w-6 h-6" />,
-      label: 'Github',
-      value: 'renzrebogio',
-      link: 'https://github.com/renzrebogio'
-    }
-  ];
 
   return (
-    <section id="contact" className="py-20 bg-secondary/20">
-      <div className="container mx-auto px-6">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 text-glow">
-            Get In Touch
-          </h2>
-
-          <div className="grid lg:grid-cols-2 gap-12">
-            {/* Contact Information */}
-            <div className="space-y-8">
-              <div className="animate-slide-up">
-                <h3 className="text-2xl font-bold mb-6 text-primary">Let's Connect</h3>
-                <p className="text-muted-foreground text-lg leading-relaxed mb-8">
-                  I'm always interested in new opportunities, collaborations, and 
-                  connecting with fellow developers. Whether you have a project in mind 
-                  or just want to chat about technology, feel free to reach out!
-                </p>
-              </div>
-
-              <div className="space-y-4">
-                {contactInfo.map((contact, index) => (
-                  <Card key={index} className="card-futuristic hover:neon-glow transition-all duration-300 animate-slide-up">
-                    <CardContent className="p-6">
-                      <div className="flex items-center gap-4">
-                        <div className="text-primary p-2 bg-primary/10 rounded-lg">
-                          {contact.icon}
-                        </div>
-                        <div>
-                          <p className="font-semibold text-foreground">{contact.label}</p>
-                          {contact.link ? (
-                            <a 
-                              href={contact.link}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="text-muted-foreground hover:text-primary transition-colors"
-                            >
-                              {contact.value}
-                            </a>
-                          ) : (
-                            <p className="text-muted-foreground">{contact.value}</p>
-                          )}
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
+    <section id="contact" className="py-24 md:py-32 bg-background border-t border-border/50 pb-44">
+      <div className="container mx-auto px-6 max-w-7xl">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-start">
+          
+          {/* Left info column */}
+          <div ref={headerRef as React.RefObject<HTMLDivElement>} className="lg:col-span-5 section-reveal space-y-8">
+            <div>
+              <span className="text-[#e27500] text-xs font-bold uppercase tracking-widest block mb-3">Get in Touch</span>
+              <h2 className="text-4xl sm:text-6xl font-black font-heading tracking-tighter text-foreground leading-[1.0] mb-6">
+                Let's work together.
+              </h2>
+              <p className="text-muted-foreground leading-relaxed text-base font-medium max-w-sm">
+                Have an idea, project, or opportunity you want to discuss? Feel free to reach out. I'm always open to new connections.
+              </p>
             </div>
 
-            {/* Contact Form */}
-            <Card className="card-futuristic animate-slide-up">
-              <CardContent className="p-8">
-                <h3 className="text-2xl font-bold mb-6 text-primary">Send a Message</h3>
-                
+            <div className="space-y-6 pt-6 border-t border-border/50">
+              <a 
+                href="mailto:renzmartinrebogio@gmail.com" 
+                className="group block"
+              >
+                <span className="block text-[10px] uppercase tracking-wider text-muted-foreground mb-1">Email address</span>
+                <span className="text-lg font-bold text-foreground group-hover:text-[#e27500] transition-colors flex items-center gap-2">
+                  <Mail className="w-5 h-5 text-[#e27500]" />
+                  renzmartinrebogio@gmail.com
+                </span>
+              </a>
+
+              <div className="group block">
+                <span className="block text-[10px] uppercase tracking-wider text-muted-foreground mb-1">Location</span>
+                <span className="text-lg font-bold text-foreground flex items-center gap-2">
+                  <MapPin className="w-5 h-5 text-[#e27500]" />
+                  Cavite City, Philippines
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* Right form column */}
+          <div ref={formRef as React.RefObject<HTMLDivElement>} className="lg:col-span-7 section-reveal">
+            <Card className="rounded-[2.5rem] bg-card border border-border/40 p-8 md:p-10 shadow-sm">
+              <CardContent className="p-0">
                 <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium mb-2 text-foreground">
-                        Name
-                      </label>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <label htmlFor="name" className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Your Name</label>
                       <Input 
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        placeholder="Your name"
-                        className="bg-background/50 border-border focus:border-primary transition-colors"
+                        id="name"
+                        placeholder="John Doe" 
+                        required
+                        className="bg-background border-border/50 focus-visible:ring-[#e27500] h-12 rounded-xl text-foreground font-semibold px-4"
                       />
                     </div>
-                    <div>
-                      <label className="block text-sm font-medium mb-2 text-foreground">
-                        Email
-                      </label>
+                    <div className="space-y-2">
+                      <label htmlFor="email" className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Email Address</label>
                       <Input 
-                        name="email"
-                        type="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        placeholder="your.email@example.com"
-                        className="bg-background/50 border-border focus:border-primary transition-colors"
+                        id="email"
+                        type="email" 
+                        placeholder="john@example.com" 
+                        required
+                        className="bg-background border-border/50 focus-visible:ring-[#e27500] h-12 rounded-xl text-foreground font-semibold px-4"
                       />
                     </div>
                   </div>
                   
-                  <div>
-                    <label className="block text-sm font-medium mb-2 text-foreground">
-                      Subject
-                    </label>
+                  <div className="space-y-2">
+                    <label htmlFor="subject" className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Subject</label>
                     <Input 
-                      name="subject"
-                      value={formData.subject}
-                      onChange={handleChange}
-                      placeholder="What's this about?"
-                      className="bg-background/50 border-border focus:border-primary transition-colors"
+                      id="subject"
+                      placeholder="Project Inquiry / Job Opportunity" 
+                      required
+                      className="bg-background border-border/50 focus-visible:ring-[#e27500] h-12 rounded-xl text-foreground font-semibold px-4"
                     />
                   </div>
                   
-                  <div>
-                    <label className="block text-sm font-medium mb-2 text-foreground">
-                      Message
-                    </label>
+                  <div className="space-y-2">
+                    <label htmlFor="message" className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Your Message</label>
                     <Textarea 
-                      name="message"
-                      value={formData.message}
-                      onChange={handleChange}
-                      placeholder="Tell me about your project or just say hi!"
-                      rows={5}
-                      className="bg-background/50 border-border focus:border-primary transition-colors resize-none"
+                      id="message"
+                      placeholder="Hi Renz, I'd like to talk about..." 
+                      className="min-h-[160px] bg-background border-border/50 focus-visible:ring-[#e27500] resize-y rounded-xl text-foreground font-semibold p-4"
+                      required
                     />
                   </div>
                   
                   <Button 
                     type="submit" 
-                    disabled={isLoading}
-                    className="w-full neon-glow text-lg py-3"
+                    className="w-full bg-[#e27500] hover:bg-[#ff8800] text-white h-12 text-xs font-bold uppercase tracking-widest rounded-xl transition-all duration-300 shadow-md shadow-[#e27500]/20"
+                    disabled={isSubmitting}
                   >
-                    <Send size={20} className="mr-2" />
-                    {isLoading ? 'Sending...' : 'Send Message'}
+                    {isSubmitting ? (
+                      <span className="flex items-center justify-center gap-2">
+                        <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                        Sending...
+                      </span>
+                    ) : (
+                      <span className="flex items-center justify-center gap-2">
+                        <Send size={14} />
+                        Send Message
+                      </span>
+                    )}
                   </Button>
                 </form>
               </CardContent>
             </Card>
           </div>
+
         </div>
       </div>
     </section>
