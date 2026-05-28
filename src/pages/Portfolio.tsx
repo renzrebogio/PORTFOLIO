@@ -62,8 +62,35 @@ const FooterMarquee = () => {
 /* ─── Portfolio page ────────────────────────────────────────────────────── */
 const Portfolio = () => {
   const [preloaderActive, setPreloaderActive] = useState(true);
+  const [progress, setProgress] = useState(0);
   const footerRef = useRef<HTMLElement>(null);
   const [footerVisible, setFooterVisible] = useState(false);
+
+  useEffect(() => {
+    // Increment progress counter smoothly
+    const interval = setInterval(() => {
+      setProgress((prev) => {
+        if (prev >= 100) {
+          clearInterval(interval);
+          return 100;
+        }
+        // Random incremental jumps matching loading feel
+        const next = prev + Math.floor(Math.random() * 10) + 4;
+        return next >= 100 ? 100 : next;
+      });
+    }, 40);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    if (progress === 100) {
+      const timer = setTimeout(() => {
+        setPreloaderActive(false);
+      }, 400);
+      return () => clearTimeout(timer);
+    }
+  }, [progress]);
 
   useEffect(() => {
     // Always start from the top on load / refresh
@@ -91,8 +118,6 @@ const Portfolio = () => {
 
     requestAnimationFrame(raf);
 
-    const timer = setTimeout(() => setPreloaderActive(false), 1500);
-
     // Observe footer for entrance animation
     const obs = new IntersectionObserver(
       ([entry]) => { if (entry.isIntersecting) setFooterVisible(true); },
@@ -103,7 +128,6 @@ const Portfolio = () => {
     return () => {
       document.documentElement.classList.remove('lenis');
       lenis.destroy();
-      clearTimeout(timer);
       obs.disconnect();
     };
   }, []);
@@ -111,17 +135,39 @@ const Portfolio = () => {
   return (
     <>
       {/* Preloader */}
-      <div id="custom-preloader" className={preloaderActive ? '' : 'hidden'}>
-        <div id="custom-preloader-text">
-          {"RENZ REBOGIO".split('').map((char, index) => (
-            <span
-              key={index}
-              className="preloader-text-char font-heading tracking-tighter"
-              style={{ animationDelay: `${index * 0.05}s` }}
-            >
-              {char === ' ' ? '\u00A0' : char}
-            </span>
-          ))}
+      <div id="custom-preloader" className={`${preloaderActive ? '' : 'hidden'} bg-[#0a0a0b]`}>
+        <div className="flex flex-col items-center gap-5 select-none">
+          {/* Top status */}
+          <div className="font-mono text-[9px] tracking-[0.25em] text-[#e27500] animate-pulse">
+            SYSTEM_INIT // RENZ_REBOGIO_PORTFOLIO
+          </div>
+
+          {/* Large text name display */}
+          <div id="custom-preloader-text" className="flex items-center gap-[0.2em] font-heading font-black text-3xl sm:text-4xl md:text-5xl tracking-tighter uppercase text-white">
+            {"RENZ REBOGIO".split('').map((char, index) => (
+              <span
+                key={index}
+                className="preloader-text-char"
+                style={{ animationDelay: `${index * 0.04}s` }}
+              >
+                {char === ' ' ? '\u00A0' : char}
+              </span>
+            ))}
+          </div>
+
+          {/* Loading bar track */}
+          <div className="w-56 sm:w-64 h-[2px] bg-white/10 rounded-full overflow-hidden relative mt-2">
+            <div
+              className="absolute left-0 top-0 bottom-0 bg-[#e27500] rounded-full transition-all duration-100 ease-out"
+              style={{ width: `${progress}%` }}
+            />
+          </div>
+
+          {/* Technical status tags */}
+          <div className="flex justify-between w-56 sm:w-64 font-mono text-[9px] text-muted-foreground/60">
+            <span>MEM_OK</span>
+            <span className="text-[#e27500] font-bold">{progress}%</span>
+          </div>
         </div>
       </div>
 
