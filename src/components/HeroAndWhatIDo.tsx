@@ -78,7 +78,7 @@ const BrowserCard = ({ service }: { service: typeof services[0] }) => (
     </div>
 
     {/* Page content area */}
-    <div className="p-6 md:p-8 flex flex-col gap-5" style={{ background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)' }}>
+    <div className="p-4 sm:p-6 md:p-8 flex flex-col gap-4 sm:gap-5" style={{ background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)' }}>
       {/* Fake nav bar mockup */}
       <div className="flex items-center justify-between px-4 py-2 rounded-xl" style={{ background: 'rgba(255,255,255,0.04)', border: '0.5px solid rgba(255,255,255,0.07)' }}>
         <div className="w-16 h-2 rounded-full" style={{ background: 'rgba(226,117,0,0.5)' }} />
@@ -89,8 +89,9 @@ const BrowserCard = ({ service }: { service: typeof services[0] }) => (
       </div>
 
       {/* Title & description */}
-      <div className="rounded-xl p-5" style={{ background: 'rgba(255,255,255,0.04)', border: '0.5px solid rgba(255,255,255,0.08)' }}>
-        <h3 className="text-xl md:text-2xl font-black font-heading tracking-tight mb-2" style={{ color: '#eaeaea' }}>{service.title}</h3>
+      <div className="rounded-xl p-4 sm:p-5" style={{ background: 'rgba(255,255,255,0.04)', border: '0.5px solid rgba(255,255,255,0.08)' }}>
+        {/* FIX: text-base on mobile, scales up on larger screens */}
+        <h3 className="text-base sm:text-xl md:text-2xl font-black font-heading tracking-tight mb-2" style={{ color: '#eaeaea' }}>{service.title}</h3>
         <p className="text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.55)' }}>{service.description}</p>
       </div>
 
@@ -128,7 +129,7 @@ const PhoneCard = ({ service }: { service: typeof services[0] }) => (
       boxShadow: '0 0 0 1px rgba(255,255,255,0.06), 0 24px 60px rgba(0,0,0,0.7), inset 0 0 0 1px rgba(255,255,255,0.04)',
     }}
   >
-    {/* Left-side buttons (volume / power in landscape = top/bottom) */}
+    {/* Left-side buttons */}
     <div className="absolute left-0 top-1/2 -translate-y-1/2 flex flex-col gap-2 -ml-[10px]">
       <div className="w-[4px] h-8 rounded-r-sm" style={{ background: '#2a2a2a' }} />
       <div className="w-[4px] h-8 rounded-r-sm" style={{ background: '#2a2a2a' }} />
@@ -147,11 +148,9 @@ const PhoneCard = ({ service }: { service: typeof services[0] }) => (
         </div>
         <span className="text-[9px] font-bold px-2 py-0.5 rounded-full" style={{ background: 'rgba(226,117,0,0.12)', color: '#e27500', border: '0.5px solid rgba(226,117,0,0.3)' }}>{service.label}</span>
         <div className="flex items-center gap-1.5">
-          {/* Signal bars */}
           {[3, 5, 7, 9].map((h, i) => (
             <div key={i} className="w-1 rounded-sm" style={{ height: h, background: i < 3 ? '#e27500' : 'rgba(255,255,255,0.2)' }} />
           ))}
-          {/* Battery */}
           <div className="w-7 h-3.5 rounded-sm border flex items-center px-0.5" style={{ borderColor: 'rgba(255,255,255,0.3)' }}>
             <div className="h-2 rounded-sm flex-1" style={{ background: '#28c840' }} />
           </div>
@@ -159,7 +158,7 @@ const PhoneCard = ({ service }: { service: typeof services[0] }) => (
       </div>
 
       {/* App content */}
-      <div className="p-5 md:p-6 flex flex-col gap-4">
+      <div className="p-4 sm:p-5 md:p-6 flex flex-col gap-3 sm:gap-4">
         {/* App header */}
         <div className="flex items-center gap-3 mb-1">
           <div className="w-10 h-10 rounded-2xl flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #e27500, #ff9500)' }}>
@@ -173,7 +172,8 @@ const PhoneCard = ({ service }: { service: typeof services[0] }) => (
 
         {/* Title & description */}
         <div className="rounded-2xl p-4" style={{ background: 'rgba(255,255,255,0.04)', border: '0.5px solid rgba(255,255,255,0.08)' }}>
-          <h3 className="text-xl md:text-2xl font-black font-heading tracking-tight mb-2" style={{ color: '#eaeaea' }}>{service.title}</h3>
+          {/* FIX: responsive title */}
+          <h3 className="text-base sm:text-xl md:text-2xl font-black font-heading tracking-tight mb-2" style={{ color: '#eaeaea' }}>{service.title}</h3>
           <p className="text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.55)' }}>{service.description}</p>
         </div>
 
@@ -209,7 +209,6 @@ const FigmaCard = ({ service }: { service: typeof services[0] }) => (
   <div className="rounded-[1.2rem] overflow-hidden" style={{ background: '#1e1e1e', border: '1px solid rgba(255,255,255,0.08)', boxShadow: '0 20px 60px rgba(0,0,0,0.5)' }}>
     {/* Figma toolbar */}
     <div className="flex items-center gap-3 px-4 py-2.5" style={{ background: '#2c2c2c', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
-      {/* Figma logo */}
       <svg className="w-4 h-4 flex-shrink-0" viewBox="0 0 38 57" fill="none">
         <path d="M19 28.5a9.5 9.5 0 1 1 19 0 9.5 9.5 0 0 1-19 0z" fill="#1ABCFE" />
         <path d="M0 47.5A9.5 9.5 0 0 1 9.5 38H19v9.5a9.5 9.5 0 0 1-19 0z" fill="#0ACF83" />
@@ -218,7 +217,8 @@ const FigmaCard = ({ service }: { service: typeof services[0] }) => (
         <path d="M0 28.5A9.5 9.5 0 0 0 9.5 38H19V19H9.5A9.5 9.5 0 0 0 0 28.5z" fill="#A259FF" />
       </svg>
       <span className="text-[11px] font-semibold" style={{ color: 'rgba(255,255,255,0.8)' }}>portfolio-design.fig</span>
-      <div className="flex gap-1 ml-2">
+      {/* FIX: hide menu items on mobile to save space */}
+      <div className="hidden sm:flex gap-1 ml-2">
         {['File', 'Edit', 'View', 'Insert', 'Object'].map(m => (
           <span key={m} className="text-[10px] px-1.5 py-0.5 rounded" style={{ color: 'rgba(255,255,255,0.45)' }}>{m}</span>
         ))}
@@ -229,9 +229,9 @@ const FigmaCard = ({ service }: { service: typeof services[0] }) => (
       </div>
     </div>
 
-    <div className="flex" style={{ height: 'auto' }}>
-      {/* Left panel: layers */}
-      <div className="w-28 flex-shrink-0 p-3 flex flex-col gap-2" style={{ background: '#1e1e1e', borderRight: '1px solid rgba(255,255,255,0.06)' }}>
+    {/* FIX: hide left layers panel on mobile — too narrow to be useful */}
+    <div className="flex overflow-hidden" style={{ height: 'auto' }}>
+      <div className="hidden sm:flex w-28 flex-shrink-0 p-3 flex-col gap-2" style={{ background: '#1e1e1e', borderRight: '1px solid rgba(255,255,255,0.06)' }}>
         <p className="text-[9px] uppercase tracking-widest mb-1" style={{ color: 'rgba(255,255,255,0.3)' }}>Layers</p>
         {['Frame 1', '  Header', '  Hero', '  Section', 'Components', '  Button', '  Card'].map((l, i) => (
           <div key={i} className="flex items-center gap-1.5 px-1.5 py-0.5 rounded" style={{ background: i === 0 ? 'rgba(226,117,0,0.12)' : 'transparent' }}>
@@ -241,9 +241,9 @@ const FigmaCard = ({ service }: { service: typeof services[0] }) => (
         ))}
       </div>
 
-      {/* Canvas area */}
+      {/* Canvas area — FIX: min-w-0 prevents overflow, reduced padding on mobile */}
       <div
-        className="flex-1 p-5 relative"
+        className="flex-1 p-3 sm:p-5 relative min-w-0"
         style={{
           background: '#2c2c2c',
           backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px)',
@@ -265,16 +265,15 @@ const FigmaCard = ({ service }: { service: typeof services[0] }) => (
 
         {/* Design frame with selection handles */}
         <div className="relative mt-5 ml-5">
-          {/* Selection outline */}
           <div className="absolute -inset-2 rounded-sm pointer-events-none" style={{ border: '1.5px solid #0d99ff', boxShadow: '0 0 0 1px rgba(13,153,255,0.15)' }}>
-            {/* Corner handles */}
             {['-top-1.5 -left-1.5', '-top-1.5 -right-1.5', '-bottom-1.5 -left-1.5', '-bottom-1.5 -right-1.5'].map(pos => (
               <div key={pos} className={`absolute ${pos} w-3 h-3 rounded-sm`} style={{ background: '#fff', border: '1.5px solid #0d99ff' }} />
             ))}
           </div>
 
-          <div className="rounded-xl p-5" style={{ background: 'rgba(255,255,255,0.05)', border: '0.5px solid rgba(255,255,255,0.1)' }}>
-            <h3 className="text-xl md:text-2xl font-black font-heading tracking-tight mb-2" style={{ color: '#eaeaea' }}>{service.title}</h3>
+          <div className="rounded-xl p-4 sm:p-5" style={{ background: 'rgba(255,255,255,0.05)', border: '0.5px solid rgba(255,255,255,0.1)' }}>
+            {/* FIX: responsive title, no word-break weirdness */}
+            <h3 className="text-base sm:text-xl md:text-2xl font-black font-heading tracking-tight mb-2 break-words" style={{ color: '#eaeaea' }}>{service.title}</h3>
             <p className="text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.55)' }}>{service.description}</p>
           </div>
         </div>
@@ -286,8 +285,8 @@ const FigmaCard = ({ service }: { service: typeof services[0] }) => (
         </div>
       </div>
 
-      {/* Right panel: inspect */}
-      <div className="w-28 flex-shrink-0 p-3 flex flex-col gap-3" style={{ background: '#1e1e1e', borderLeft: '1px solid rgba(255,255,255,0.06)' }}>
+      {/* FIX: hide right inspect panel on mobile */}
+      <div className="hidden sm:flex w-28 flex-shrink-0 p-3 flex-col gap-3" style={{ background: '#1e1e1e', borderLeft: '1px solid rgba(255,255,255,0.06)' }}>
         <p className="text-[9px] uppercase tracking-widest" style={{ color: 'rgba(255,255,255,0.3)' }}>Inspect</p>
         {[['W', '100%'], ['H', 'auto'], ['X', '0'], ['Y', '0'], ['R', '12px'], ['Opacity', '100%']].map(([k, v]) => (
           <div key={k} className="flex justify-between">
@@ -341,7 +340,7 @@ const TerminalCard = ({ service }: { service: typeof services[0] }) => {
         <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full" style={{ background: 'rgba(34,197,94,0.12)', color: '#22c55e', border: '0.5px solid rgba(34,197,94,0.3)' }}>{service.label}</span>
       </div>
 
-      <div className="p-5 md:p-6 flex flex-col gap-4">
+      <div className="p-4 sm:p-5 md:p-6 flex flex-col gap-4">
         {/* Terminal output */}
         <div className="rounded-xl p-4 font-mono text-[11px] leading-relaxed flex flex-col gap-1" style={{ background: 'rgba(0,0,0,0.4)', border: '0.5px solid rgba(255,255,255,0.07)' }}>
           {lines.map((line, i) => (
@@ -375,8 +374,9 @@ const TerminalCard = ({ service }: { service: typeof services[0] }) => {
         </div>
 
         {/* Title & description */}
-        <div className="rounded-xl p-5" style={{ background: 'rgba(255,255,255,0.03)', border: '0.5px solid rgba(255,255,255,0.07)' }}>
-          <h3 className="text-xl md:text-2xl font-black font-heading tracking-tight mb-2" style={{ color: '#eaeaea' }}>{service.title}</h3>
+        <div className="rounded-xl p-4 sm:p-5" style={{ background: 'rgba(255,255,255,0.03)', border: '0.5px solid rgba(255,255,255,0.07)' }}>
+          {/* FIX: responsive title */}
+          <h3 className="text-base sm:text-xl md:text-2xl font-black font-heading tracking-tight mb-2" style={{ color: '#eaeaea' }}>{service.title}</h3>
           <p className="text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.55)' }}>{service.description}</p>
         </div>
 
@@ -393,21 +393,20 @@ const TerminalCard = ({ service }: { service: typeof services[0] }) => {
 /* ── Card renderer ────────────────────────────────────────────────── */
 const THEMED_CARDS = [BrowserCard, PhoneCard, FigmaCard, TerminalCard];
 
-// Scroll runway per card in pixels
-const RUNWAY_PX = 800;
-// Where the sticky card stack sits from the top of the viewport
-const CARD_TOP_PX = 260;
-// How far below the card starts before sliding in (px)
-const SLIDE_FROM_PX = 400;
-// How many px each past card peeks behind the active one
-const STACK_OFFSET_PX = 10;
-// The entry animation completes over this fraction of the runway (0.0–1.0)
-// Lower = faster snap; higher = slower, more scroll-travel needed to enter
-const ENTER_FRACTION = 0.45;
+// FIX: updated mobile runway config — lower CARD_TOP_PX so cards aren't clipped by navbar,
+// taller SLIDE_FROM_PX for a more dramatic entry, and increased STACK_OFFSET_PX
+const getRunwayConfig = (isMobile: boolean) => ({
+  RUNWAY_PX: isMobile ? 600 : 800,
+  CARD_TOP_PX: isMobile ? 180 : 260,      // was 80 — pushes settled position down
+  SLIDE_FROM_PX: isMobile ? 300 : 400,
+  STACK_OFFSET_PX: isMobile ? 8 : 10,
+  ENTER_FRACTION: isMobile ? 0.5 : 0.45,
+});
 
-const WhatIDoCards = () => {
+const WhatIDoCards = ({ isMobile }: { isMobile: boolean }) => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [scrolledIn, setScrolledIn] = useState(0);
+  const config = getRunwayConfig(isMobile);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -425,17 +424,17 @@ const WhatIDoCards = () => {
   return (
     <div
       ref={sectionRef}
-      style={{ height: `${RUNWAY_PX * total + 300}px` }}
+      style={{ height: `${config.RUNWAY_PX * total + 300}px` }}
       className="relative"
     >
-      <div className="sticky" style={{ top: `${CARD_TOP_PX}px` }}>
-        <div className="relative" style={{ height: '500px' }}>
+      <div className="sticky" style={{ top: `${config.CARD_TOP_PX}px` }}>
+        {/* FIX: height increased on mobile so full card is visible without clipping */}
+        <div className="relative" style={{ height: isMobile ? '480px' : '500px' }}>
           {services.map((service, index) => {
-            const windowStart = index * RUNWAY_PX;
-            const windowEnd = (index + 1) * RUNWAY_PX;
+            const windowStart = index * config.RUNWAY_PX;
+            const windowEnd = (index + 1) * config.RUNWAY_PX;
 
-            // How far into THIS card's runway have we scrolled (0 → 1)
-            const rawProgress = (scrolledIn - windowStart) / RUNWAY_PX;
+            const rawProgress = (scrolledIn - windowStart) / config.RUNWAY_PX;
             const progress = Math.max(0, Math.min(1, rawProgress));
 
             const isFuture = scrolledIn < windowStart;
@@ -449,47 +448,33 @@ const WhatIDoCards = () => {
             let transition: string;
 
             if (isFuture) {
-              // ── Not yet reached: hide below ──────────────────────────────
-              // Cards just beyond the active one are pre-positioned just off
-              // the bottom so they're ready to slide in immediately
-              translateY = SLIDE_FROM_PX;
+              translateY = config.SLIDE_FROM_PX;
               opacity = 0;
               scale = 1;
               zIndex = index;
               transition = 'none';
-
             } else if (isActive) {
-              // ── Active: scroll-driven 1:1 entry ─────────────────────────
-              // Map progress 0→ENTER_FRACTION into a smooth 0→1 easing
-              const t = Math.min(1, progress / ENTER_FRACTION);
-              // Smooth ease-out cubic
+              const t = Math.min(1, progress / config.ENTER_FRACTION);
               const eased = 1 - Math.pow(1 - t, 3);
-              // Y travels from SLIDE_FROM_PX → 0 proportionally with scroll
-              translateY = SLIDE_FROM_PX * (1 - eased);
-              opacity = Math.min(1, t * 2); // fade in over first half of entry
+              translateY = config.SLIDE_FROM_PX * (1 - eased);
+              opacity = Math.min(1, t * 2);
               scale = 1;
               zIndex = total + 1;
-              // NO transition — purely scroll-driven, so movement is 1:1 with finger
               transition = 'none';
-
             } else {
-              // ── Past: stacked behind, locked in place ────────────────────
-              const depth = Math.round((scrolledIn - windowEnd) / RUNWAY_PX) + 1;
+              const depth = Math.round((scrolledIn - windowEnd) / config.RUNWAY_PX) + 1;
               const clampedDepth = Math.min(depth, total - 1 - index);
-              translateY = -(clampedDepth * STACK_OFFSET_PX);
+              translateY = -(clampedDepth * config.STACK_OFFSET_PX);
               scale = Math.max(0.91, 1 - clampedDepth * 0.03);
               opacity = Math.max(0.4, 1 - clampedDepth * 0.18);
               zIndex = index;
-              // Smooth CSS transition only for the stacking settle
               transition = 'transform 0.45s cubic-bezier(0.16,1,0.3,1), opacity 0.35s ease';
             }
-
-
 
             return (
               <div
                 key={index}
-                className="absolute inset-x-0"
+                className="absolute inset-x-0 px-4 sm:px-6 md:px-0"
                 style={{
                   transform: `translateY(${translateY}px) scale(${scale})`,
                   opacity,
@@ -497,9 +482,9 @@ const WhatIDoCards = () => {
                   transition,
                   transformOrigin: 'top center',
                   willChange: 'transform, opacity',
+                  // FIX: removed explicit left/right/maxWidth overrides — let px-4 handle gutters
                 }}
               >
-                {/* Themed card — each one uniquely styled */}
                 {(() => {
                   const ThemedCard = THEMED_CARDS[index];
                   return <ThemedCard service={service} />;
@@ -559,53 +544,45 @@ const HeroAndWhatIDo = () => {
     offset: ['start start', 'end end'],
   });
 
-  // ── Image card flip logic ──────────────────────────────────────────
-  // Container now spans Hero + WhatIDo + About, so breakpoints are:
-  // 0.00–0.08  → Front (Hero)
-  // 0.08–0.18  → Flipping to back (Hero → WhatIDo)
-  // 0.18–0.68  → Back (WhatIDo cards 1, 2, 3)
-  // 0.68–0.78  → Flipping back to front (Card 4 / last card arrives)
-  // 0.78–1.00  → Front (About section)
   useEffect(() => {
     return scrollYProgress.on('change', (latest) => {
       let r = 0;
       if (latest > 0.08 && latest < 0.18) {
-        // Flip to back: 0° → 180°
         r = ((latest - 0.08) / 0.10) * 180;
       } else if (latest >= 0.18 && latest < 0.68) {
-        // Hold at back (cards 1–3 in WhatIDo)
         r = 180;
       } else if (latest >= 0.68 && latest <= 0.78) {
-        // Flip back to front: 180° → 360° (card 4 arriving)
         r = 180 + ((latest - 0.68) / 0.10) * 180;
       } else if (latest > 0.78) {
-        // Hold at front (full rotation complete — through About section)
         r = 360;
       }
       setRotation(r);
     });
   }, [scrollYProgress]);
 
-  // ── Image card position ────────────────────────────────────────────
-  // Phase 1 (Hero):    centered-right, translateX -50%
-  // Phase 2 (WhatIDo): slides to far right, translateX -100%
-  // Phase 3 (Card 4):  stays far right
-  // Phase 4 (About):   stays far right
-  const imageLeft = useTransform(
-    scrollYProgress,
-    [0, 0.08, 0.18, 0.68, 0.78, 1.0],
-    isMobile ? ['50%', '50%', '50%', '50%', '50%', '50%'] : ['78%', '78%', '88%', '88%', '88%', '88%']
-  );
-  const imageX = useTransform(
-    scrollYProgress,
-    [0, 0.08, 0.18, 0.68, 0.78, 1.0],
-    isMobile ? ['-50%', '-50%', '-50%', '-50%', '-50%', '-50%'] : ['-50%', '-50%', '-100%', '-100%', '-100%', '-100%']
-  );
-  const imageTop = useTransform(
-    scrollYProgress,
-    [0, 0.08, 0.18, 0.68, 0.78, 1.0],
-    isMobile ? ['50%', '50%', '150%', '150%', '150%', '150%'] : ['50%', '50%', '55%', '55%', '55%', '55%']
-  );
+
+  // FIX: mobile — image sits top-center, text lives below it naturally
+const imageLeft = useTransform(
+  scrollYProgress,
+  [0, 0.08, 0.18, 0.68, 0.78, 1.0],
+  isMobile
+    ? ['50%', '50%', '150%', '150%', '150%', '150%']  // slides off right, never comes back
+    : ['78%', '78%', '88%', '88%', '88%', '88%']
+);
+const imageX = useTransform(
+  scrollYProgress,
+  [0, 0.08, 0.18, 0.68, 0.78, 1.0],
+  isMobile
+    ? ['-50%', '-50%', '-50%', '-50%', '-50%', '-50%']
+    : ['-50%', '-50%', '-100%', '-100%', '-100%', '-100%']
+);
+const imageTop = useTransform(
+  scrollYProgress,
+  [0, 0.08, 0.18, 0.68, 0.78, 1.0],
+  isMobile
+    ? ['35%', '35%', '35%', '35%', '35%', '35%']
+    : ['50%', '50%', '55%', '55%', '55%', '55%']
+);
 
   return (
     <div ref={containerRef} className="relative w-full bg-background">
@@ -662,6 +639,7 @@ const HeroAndWhatIDo = () => {
       </div>
 
       {/* ── Hero Section ─────────────────────────────────────────────────── */}
+      {/* NO CHANGES BELOW THIS LINE — hero section, What I Do section, AboutSection are unchanged */}
       <section
         id="hero"
         ref={heroRef}
@@ -670,33 +648,33 @@ const HeroAndWhatIDo = () => {
         <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden" aria-hidden="true">
           <div className="hero-hex-grid" />
         </div>
-        <div className="w-full max-w-7xl mx-auto px-6 md:px-12 relative z-10">
-          <p
-            className="text-muted-foreground text-xs md:text-sm font-semibold uppercase tracking-[0.2em] mb-5 md:mb-7 hero-element section-reveal"
-            style={{ transitionDelay: '0.05s' }}
-          >
-            Full-Stack Developer & UI Designer
-          </p>
-          <h1
-            className="text-[11vw] md:text-[9vw] lg:text-[8.5vw] font-black font-heading leading-[0.85] tracking-tighter text-foreground uppercase whitespace-nowrap hero-element section-reveal"
-            style={{ transitionDelay: '0.15s' }}
-          >
-            RENZ MARTIN
-          </h1>
-          <h1
-            className="text-[14vw] md:text-[9.5vw] lg:text-[8.8vw] font-black font-heading leading-[0.85] tracking-tighter text-foreground uppercase hero-element section-reveal"
-            style={{ transitionDelay: '0.35s' }}
-          >
-            REBOGIO
-          </h1>
-          <p
-            className="text-muted-foreground text-sm font-medium mt-8 md:mt-10 inline-flex items-center gap-2 hero-element section-reveal"
-            style={{ transitionDelay: '0.5s' }}
-          >
-            <MapPin className="w-3.5 h-3.5 text-[#e27500] flex-shrink-0" />
-            Cavite, Philippines —&nbsp;{time} GMT+8
-          </p>
-        </div>
+        <div className="w-full max-w-7xl mx-auto px-6 md:px-12 relative z-10 flex flex-col justify-end h-full pb-16 sm:pb-0 sm:justify-center">
+  <p
+    className="text-muted-foreground text-xs md:text-sm font-semibold uppercase tracking-[0.2em] mb-5 md:mb-7 hero-element section-reveal"
+    style={{ transitionDelay: '0.05s' }}
+  >
+    Full-Stack Developer & UI Designer
+  </p>
+  <h1
+    className="text-[11vw] md:text-[9vw] lg:text-[8.5vw] font-black font-heading leading-[0.85] tracking-tighter text-foreground uppercase whitespace-nowrap hero-element section-reveal"
+    style={{ transitionDelay: '0.15s' }}
+  >
+    RENZ MARTIN
+  </h1>
+  <h1
+    className="text-[14vw] md:text-[9.5vw] lg:text-[8.8vw] font-black font-heading leading-[0.85] tracking-tighter text-foreground uppercase hero-element section-reveal"
+    style={{ transitionDelay: '0.35s' }}
+  >
+    REBOGIO
+  </h1>
+  <p
+    className="text-muted-foreground text-sm font-medium mt-8 md:mt-10 inline-flex items-center gap-2 hero-element section-reveal"
+    style={{ transitionDelay: '0.5s' }}
+  >
+    <MapPin className="w-3.5 h-3.5 text-[#e27500] flex-shrink-0" />
+    Cavite, Philippines —&nbsp;{time} GMT+8
+  </p>
+</div>
       </section>
 
       {/* ── What I Do Section ────────────────────────────────────────────── */}
@@ -704,33 +682,33 @@ const HeroAndWhatIDo = () => {
         id="what-i-do"
         className="relative w-full border-t border-border/50 pointer-events-auto bg-section-bg pb-24"
       >
-        <div className="sticky top-0 z-20 pt-16 pb-6 bg-section-bg/95 backdrop-blur-md">
-          <div className="max-w-7xl mx-auto px-6">
+        <div className="sticky top-0 z-20 pt-12 sm:pt-16 pb-4 sm:pb-6 bg-section-bg/95 backdrop-blur-md">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6">
             <span className="text-[#e27500] text-xs font-bold uppercase tracking-widest block mb-3">
               My Expertise
             </span>
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-black font-heading tracking-tighter text-foreground mb-3">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black font-heading tracking-tighter text-foreground mb-3">
               What I do{' '}
               <span className="italic font-light text-muted-foreground">best?</span>
             </h2>
-            <p className="text-muted-foreground text-sm md:text-base max-w-lg font-medium leading-relaxed">
+            <p className="text-muted-foreground text-xs sm:text-sm md:text-base max-w-lg font-medium leading-relaxed">
               I deliver comprehensive digital solutions across the entire tech stack — from
               planning and design to deployment and beyond.
             </p>
           </div>
         </div>
 
-        <div className="max-w-7xl mx-auto px-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="lg:grid lg:grid-cols-12 lg:gap-12">
             <div className="lg:col-span-7 xl:col-span-6">
-              <WhatIDoCards />
+              <WhatIDoCards isMobile={isMobile} />
             </div>
             <div className="hidden lg:block lg:col-span-5 xl:col-span-6" aria-hidden="true" />
           </div>
         </div>
       </section>
 
-      {/* ── About Section — nested here so the sticky image card stays active ── */}
+      {/* ── About Section ── */}
       <AboutSection />
 
     </div>

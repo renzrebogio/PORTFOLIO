@@ -309,13 +309,13 @@ const skillCategories = [
     title: 'Mobile Development',
     icon: <Smartphone className="w-5 h-5 text-[#e27500]" />,
     speedClass: 'marquee-scroll-left',
-    skills: ['Flutter', 'Dart', 'Android Studio', 'Firebase', 'VS Code']
+    skills: ['Flutter', 'Dart', 'Android Studio', 'Firebase']
   },
   {
     title: 'DevOps, Hardware & Tools',
     icon: <Settings className="w-5 h-5 text-[#e27500]" />,
     speedClass: 'marquee-scroll-right',
-    skills: ['Git', 'GitHub', 'Docker', 'Arduino', 'Vercel', 'Netlify', 'Stripe', 'Postman']
+    skills: ['Git', 'GitHub', 'Arduino', 'Vercel', 'Netlify', 'Stripe', 'Postman']
   }
 ];
 
@@ -392,7 +392,7 @@ const SkillsSection = () => {
 
             <h3 className="text-lg font-bold font-heading tracking-tight mb-8 text-center text-foreground uppercase tracking-widest flex items-center justify-center gap-2">
               <span className="w-1.5 h-1.5 rounded-full bg-[#e27500] animate-pulse" />
-              Auxiliary Cores // Soft Skills & Qualities
+              Soft Skills & Qualities
             </h3>
             
             <div className="flex flex-wrap justify-center gap-3">

@@ -77,13 +77,13 @@ const AboutSection = () => {
   };
 
   return (
-    <section id="about" className="py-24 md:py-32 bg-section-bg dashboard-dot-grid border-t border-border/50">
-      <div className="container mx-auto px-6 max-w-7xl">
+    <section id="about" className="py-16 sm:py-24 md:py-32 bg-section-bg dashboard-dot-grid border-t border-border/50 relative z-40">
+      <div className="container mx-auto px-4 sm:px-6 max-w-7xl">
 
         {/* ── Section header ──────────────────────────────────── */}
-        <div ref={headerRef as React.RefObject<HTMLDivElement>} className="section-reveal mb-16 md:mb-24">
+        <div ref={headerRef as React.RefObject<HTMLDivElement>} className="section-reveal mb-12 sm:mb-16 md:mb-24">
           <span className="text-[#e27500] text-xs font-bold uppercase tracking-widest block mb-3">About me</span>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-black font-heading tracking-tighter text-foreground">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black font-heading tracking-tighter text-foreground">
             My Journey
           </h2>
         </div>
@@ -98,7 +98,7 @@ const AboutSection = () => {
               whileInView="visible"
               viewport={{ once: true, margin: "-100px" }}
               variants={containerVariants}
-              className="pcb-board p-6 sm:p-8 md:p-10 flex flex-col gap-8 relative"
+              className="pcb-board p-4 sm:p-6 md:p-8 lg:p-10 flex flex-col gap-6 sm:gap-8 relative"
             >
               {/* Mounting Holes */}
               <div className="pcb-mounting-hole top-left" />
@@ -136,22 +136,22 @@ const AboutSection = () => {
               </div>
 
               {/* Unified Contents with vertical spacing */}
-              <div className="relative z-10 space-y-6 sm:space-y-8 py-4 px-2 sm:px-4">
+              <div className="relative z-10 space-y-5 sm:space-y-6 md:space-y-8 py-2 sm:py-4 px-1 sm:px-4">
                 
                 {/* ── Section 1: Profile ──────────────────────── */}
                 <motion.div variants={chipVariants} className="pcb-chip">
                   <ChipPins />
-                  <div className="flex items-center justify-between mb-4">
-                    <h3 className="font-mono text-xs sm:text-sm font-bold uppercase tracking-widest flex items-center gap-2" style={{ color: '#e27500' }}>
-                      <Cpu size={16} />
+                  <div className="flex items-center justify-between mb-3 sm:mb-4">
+                    <h3 className="font-mono text-[10px] sm:text-xs md:text-sm font-bold uppercase tracking-widest flex items-center gap-2" style={{ color: '#e27500' }}>
+                      <Cpu size={14} className="sm:w-4 sm:h-4" />
                       <span>U1 // Profile</span>
                     </h3>
-                    <span className="font-mono text-[8px] sm:text-[9px] text-[#e27500]/60 uppercase tracking-widest hidden sm:inline">
+                    <span className="font-mono text-[7px] sm:text-[8px] md:text-[9px] text-[#e27500]/60 uppercase tracking-widest hidden sm:inline">
                       8-Bit MCU
                     </span>
                   </div>
                   
-                  <p className="text-sm md:text-base leading-relaxed text-white/70 mb-6">
+                  <p className="text-xs sm:text-sm md:text-base leading-relaxed text-white/70 mb-4 sm:mb-6">
                     Full-stack developer and UI/UX designer with a BS in Computer Engineering.
                     I build performant, scalable web and mobile applications from the ground up —
                     from database architecture and RESTful APIs to polished, accessible frontends.
@@ -159,43 +159,43 @@ const AboutSection = () => {
                   </p>
 
                   {/* Location & Social Row */}
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-4 border-t border-white/5">
-                    <div className="flex items-center gap-2 text-white/50 font-mono text-[11px]">
-                      <MapPin size={12} className="text-[#e27500]" />
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 pt-3 sm:pt-4 border-t border-white/5">
+                    <div className="flex items-center gap-1.5 sm:gap-2 text-white/50 font-mono text-[9px] sm:text-[10px] md:text-[11px]">
+                      <MapPin size={10} className="sm:w-3 sm:h-3 text-[#e27500]" />
                       <span>LOCATION:</span>
                       <span className="text-white/80">Cavite, PH</span>
                     </div>
                     
                     {/* Social media links with brand logos */}
-                    <div className="flex items-center gap-3">
-                      <span className="font-mono text-[9px] text-white/30 uppercase tracking-widest mr-1">socials:</span>
+                    <div className="flex items-center gap-2 sm:gap-3">
+                      <span className="font-mono text-[8px] sm:text-[9px] text-white/30 uppercase tracking-widest mr-0.5 sm:mr-1">socials:</span>
                       
                       <a
                         href="https://github.com/renzrebogio"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="w-8 h-8 rounded-full flex items-center justify-center border border-white/10 text-white/60 hover:text-[#e27500] hover:border-[#e27500] hover:bg-[#e27500]/5 transition-all duration-300 hover:shadow-[0_0_10px_rgba(226,117,0,0.15)] group"
+                        className="w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center border border-white/10 text-white/60 hover:text-[#e27500] hover:border-[#e27500] hover:bg-[#e27500]/5 transition-all duration-300 hover:shadow-[0_0_10px_rgba(226,117,0,0.15)] group"
                         title="GitHub"
                       >
-                        <Github size={16} className="group-hover:scale-110 transition-transform duration-300" />
+                        <Github size={14} className="sm:w-4 sm:h-4 group-hover:scale-110 transition-transform duration-300" />
                       </a>
 
                       <a
                         href="https://linkedin.com/in/renz-martin-rebogio-3916ab364"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="w-8 h-8 rounded-full flex items-center justify-center border border-white/10 text-white/60 hover:text-[#e27500] hover:border-[#e27500] hover:bg-[#e27500]/5 transition-all duration-300 hover:shadow-[0_0_10px_rgba(226,117,0,0.15)] group"
+                        className="w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center border border-white/10 text-white/60 hover:text-[#e27500] hover:border-[#e27500] hover:bg-[#e27500]/5 transition-all duration-300 hover:shadow-[0_0_10px_rgba(226,117,0,0.15)] group"
                         title="LinkedIn"
                       >
-                        <Linkedin size={16} className="group-hover:scale-110 transition-transform duration-300" />
+                        <Linkedin size={14} className="sm:w-4 sm:h-4 group-hover:scale-110 transition-transform duration-300" />
                       </a>
 
                       <a
                         href="mailto:renzmartinrebogio@gmail.com"
-                        className="w-8 h-8 rounded-full flex items-center justify-center border border-white/10 text-white/60 hover:text-[#e27500] hover:border-[#e27500] hover:bg-[#e27500]/5 transition-all duration-300 hover:shadow-[0_0_10px_rgba(226,117,0,0.15)] group"
+                        className="w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center border border-white/10 text-white/60 hover:text-[#e27500] hover:border-[#e27500] hover:bg-[#e27500]/5 transition-all duration-300 hover:shadow-[0_0_10px_rgba(226,117,0,0.15)] group"
                         title="Email"
                       >
-                        <Mail size={16} className="group-hover:scale-110 transition-transform duration-300" />
+                        <Mail size={14} className="sm:w-4 sm:h-4 group-hover:scale-110 transition-transform duration-300" />
                       </a>
                     </div>
                   </div>
@@ -204,37 +204,37 @@ const AboutSection = () => {
                 {/* ── Section 2: Education ────────────────────── */}
                 <motion.div variants={chipVariants} className="pcb-chip">
                   <ChipPins />
-                  <div className="flex items-center justify-between mb-6">
-                    <h3 className="font-mono text-xs sm:text-sm font-bold uppercase tracking-widest flex items-center gap-2" style={{ color: '#e27500' }}>
-                      <Award size={16} />
+                  <div className="flex items-center justify-between mb-4 sm:mb-6">
+                    <h3 className="font-mono text-[10px] sm:text-xs md:text-sm font-bold uppercase tracking-widest flex items-center gap-2" style={{ color: '#e27500' }}>
+                      <Award size={14} className="sm:w-4 sm:h-4" />
                       <span>U2 // Education</span>
                     </h3>
-                    <span className="font-mono text-[8px] sm:text-[9px] text-[#e27500]/60 uppercase tracking-widest hidden sm:inline">
+                    <span className="font-mono text-[7px] sm:text-[8px] md:text-[9px] text-[#e27500]/60 uppercase tracking-widest hidden sm:inline">
                       ROM_MODULE
                     </span>
                   </div>
 
-                  <div className="relative pl-8">
+                  <div className="relative pl-6 sm:pl-8">
                     {/* PCB trace timeline connector */}
-                    <div className="absolute left-[7px] top-2 bottom-2 bg-gradient-to-b from-[#e27500]/60 to-[#e27500]/10"
+                    <div className="absolute left-[5px] sm:left-[7px] top-2 bottom-2 bg-gradient-to-b from-[#e27500]/60 to-[#e27500]/10"
                          style={{ width: '2px' }} />
 
-                    <div className="space-y-6">
+                    <div className="space-y-4 sm:space-y-6">
                       {timelineEntries.map((entry, i) => (
-                        <div key={i} className="relative flex items-start gap-4">
+                        <div key={i} className="relative flex items-start gap-3 sm:gap-4">
                           {/* Solder point terminal dot */}
-                          <div className="absolute left-[-29px] top-1 w-[12px] h-[12px] rounded-full bg-[#e27500] border-2 border-white/20 shadow-[0_0_6px_rgba(226,117,0,0.6)]" />
+                          <div className="absolute -left-5 sm:-left-6 top-1 w-[10px] sm:w-[12px] h-[10px] sm:h-[12px] rounded-full bg-[#e27500] border-2 border-white/20 shadow-[0_0_6px_rgba(226,117,0,0.6)]" />
 
                           <div>
-                            <span className="font-mono text-[11px] font-bold tracking-wider block mb-1 text-[#e27500]">
+                            <span className="font-mono text-[9px] sm:text-[10px] md:text-[11px] font-bold tracking-wider block mb-1 text-[#e27500]">
                               {entry.year}
                             </span>
-                            <h4 className="text-base font-bold text-white/90 leading-snug">{entry.title}</h4>
-                            <p className="font-mono text-[11px] mt-0.5 text-white/50">
+                            <h4 className="text-sm sm:text-base font-bold text-white/90 leading-snug">{entry.title}</h4>
+                            <p className="font-mono text-[9px] sm:text-[10px] md:text-[11px] mt-0.5 text-white/50">
                               {entry.subtitle}
                             </p>
                             {entry.highlight && (
-                              <span className="inline-block mt-2.5 text-[10px] font-bold uppercase tracking-widest px-2.5 py-0.5 rounded-full"
+                              <span className="inline-block mt-2 sm:mt-2.5 text-[9px] sm:text-[10px] font-bold uppercase tracking-widest px-2 sm:px-2.5 py-0.5 rounded-full"
                                 style={{ background: 'rgba(226, 117, 0, 0.12)', color: '#e27500', border: '0.5px solid rgba(226, 117, 0, 0.25)' }}>
                                 {entry.highlight}
                               </span>
@@ -249,37 +249,37 @@ const AboutSection = () => {
                 {/* ── Section 3: Certifications ───────────────── */}
                 <motion.div variants={chipVariants} className="pcb-chip">
                   <ChipPins />
-                  <div className="flex items-center justify-between mb-5">
-                    <h3 className="font-mono text-xs sm:text-sm font-bold uppercase tracking-widest flex items-center gap-2" style={{ color: '#e27500' }}>
-                      <Award size={16} />
+                  <div className="flex items-center justify-between mb-3 sm:mb-5">
+                    <h3 className="font-mono text-[10px] sm:text-xs md:text-sm font-bold uppercase tracking-widest flex items-center gap-2" style={{ color: '#e27500' }}>
+                      <Award size={14} className="sm:w-4 sm:h-4" />
                       <span>U3 // Certifications</span>
                     </h3>
-                    <span className="font-mono text-[8px] sm:text-[9px] text-[#e27500]/60 uppercase tracking-widest hidden sm:inline">
+                    <span className="font-mono text-[7px] sm:text-[8px] md:text-[9px] text-[#e27500]/60 uppercase tracking-widest hidden sm:inline">
                       EEPROM_BLOCK
                     </span>
                   </div>
 
-                  <div className="space-y-3">
+                  <div className="space-y-2 sm:space-y-3">
                     {certificates.map((cert) => (
                       <div
                         key={cert.id}
-                        className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 p-4 rounded-xl transition-all duration-300"
+                        className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-3 p-3 sm:p-4 rounded-xl transition-all duration-300"
                         style={{
                           background: 'rgba(255, 255, 255, 0.02)',
                           border: '0.5px solid rgba(255, 255, 255, 0.05)',
                         }}
                       >
-                        <div className="flex items-center gap-3">
+                        <div className="flex items-center gap-2 sm:gap-3">
                           {/* Verified checkmark badge styled as solder terminal */}
-                          <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0"
+                          <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center flex-shrink-0"
                             style={{ background: 'rgba(34, 197, 94, 0.12)', border: '1px solid rgba(34, 197, 94, 0.3)' }}>
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#22c55e" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#22c55e" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="sm:w-3 sm:h-3">
                               <polyline points="20 6 9 17 4 12" />
                             </svg>
                           </div>
-                          <div>
-                            <h4 className="text-sm font-bold text-white/85 leading-snug">{cert.title}</h4>
-                            <p className="font-mono text-[10px] uppercase tracking-wider text-white/40">
+                          <div className="min-w-0">
+                            <h4 className="text-xs sm:text-sm font-bold text-white/85 leading-snug">{cert.title}</h4>
+                            <p className="font-mono text-[8px] sm:text-[9px] md:text-[10px] uppercase tracking-wider text-white/40">
                               {cert.issuer} • {cert.year}
                             </p>
                           </div>
@@ -287,7 +287,7 @@ const AboutSection = () => {
                         
                         <button
                           onClick={() => setSelectedCertificate(cert)}
-                          className="self-start sm:self-center flex items-center gap-2 px-4 py-2 rounded-full transition-all duration-300 text-[10px] font-bold uppercase tracking-widest group"
+                          className="self-start sm:self-center flex items-center gap-1.5 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full transition-all duration-300 text-[8px] sm:text-[10px] font-bold uppercase tracking-widest group whitespace-nowrap"
                           style={{
                             background: 'transparent',
                             border: '1px solid rgba(226, 117, 0, 0.3)',
@@ -304,7 +304,7 @@ const AboutSection = () => {
                             (e.currentTarget as HTMLButtonElement).style.boxShadow = 'none';
                           }}
                         >
-                          <Eye size={12} />
+                          <Eye size={10} className="sm:w-3 sm:h-3" />
                           View
                         </button>
                       </div>
