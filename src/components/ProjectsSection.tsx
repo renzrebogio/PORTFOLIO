@@ -18,7 +18,7 @@ const ProjectsSection = () => {
     demoVideo: string;
     githubUrl: string;
   } | null>(null);
-  
+
   const [carouselIndex, setCarouselIndex] = useState(0);
   const headerRef = useScrollReveal({ threshold: 0.2 });
 
@@ -40,6 +40,22 @@ const ProjectsSection = () => {
   };
 
   const projects = [
+    {
+      title: 'Learner Outcomes Assessment Tracker',
+      year: '2026',
+      description: 'Developed a comprehensive web application for the DepEd Schools Division Office of Cavite City to monitor and record student proficiency levels from Grades 1 to 12 across the division.',
+      achievements: [
+        'Served as the sole full-stack developer, collaborating closely with the supervisor to align on key requirements',
+        'Built an overall performance dashboard and a module allocation page to track student resource needs',
+        'Successfully deployed the platform via Vercel, currently undergoing testing by local teachers and LOA coordinators'
+      ],
+      technologies: ['React', 'NodeJS', 'Express', 'Neon PostgreSQL'],
+      teamSize: 'Solo Project (OJT)',
+      role: 'Full-Stack Developer',
+      thumbnail: 'loat_thumbnail.jpg',
+      demoVideo: '',
+      githubUrl: 'https://github.com/renzrebogio'
+    },
     {
       title: 'PIXELBOT',
       year: '2025',
@@ -93,7 +109,7 @@ const ProjectsSection = () => {
     },
     {
       title: 'Casa Lasa - Full Stack Food Delivery',
-      year: '2025', 
+      year: '2025',
       description: 'Built a comprehensive food delivery web application demonstrating complete end-to-end development capability with secure user authentication, efficient database-driven order management, and seamless payment processing.',
       achievements: [
         'Completed entire project independently',
@@ -102,7 +118,7 @@ const ProjectsSection = () => {
         'Integrated Stripe payment processing'
       ],
       technologies: ['React JS', 'MongoDB', 'Express', 'NodeJS', 'Stripe'],
-      teamSize: 'Solo Project', 
+      teamSize: 'Solo Project',
       role: 'Full-Stack Developer',
       thumbnail: 'casalasa_thumbnail.jpg',
       demoVideo: '',
@@ -159,7 +175,7 @@ const ProjectsSection = () => {
         </div>
         {/* Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-background/30 to-transparent"></div>
-        
+
         {/* Project Year overlay */}
         <span className="absolute top-6 right-6 font-bold text-xs uppercase tracking-widest px-3.5 py-1.5 rounded-full bg-background/80 border border-border/50 text-foreground backdrop-blur-md">
           {project.year}
@@ -170,7 +186,7 @@ const ProjectsSection = () => {
         <CardTitle className="text-xl sm:text-2xl md:text-3xl font-bold font-heading text-foreground group-hover:text-[#e27500] transition-colors duration-300">
           {project.title}
         </CardTitle>
-        
+
         <div className="flex flex-wrap items-center gap-3 sm:gap-4 text-xs font-semibold uppercase tracking-wider text-muted-foreground mt-2">
           <div className="flex items-center gap-1.5">
             <Users size={14} className="text-[#e27500]" />
@@ -203,7 +219,7 @@ const ProjectsSection = () => {
 
           <div className="flex flex-wrap gap-1.5">
             {project.technologies.map((tech, techIndex) => (
-              <Badge 
+              <Badge
                 key={techIndex}
                 variant="secondary"
                 className="bg-background text-foreground border border-border/50 text-xs font-semibold px-2.5 py-1"
@@ -215,8 +231,8 @@ const ProjectsSection = () => {
         </div>
 
         <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 border-t border-border/50 pt-4 sm:pt-6">
-          <Button 
-            variant="outline" 
+          <Button
+            variant="outline"
             className="flex-1 border-border/60 hover:border-foreground text-foreground rounded-full transition-all duration-300 font-bold text-xs uppercase tracking-wider h-10 sm:h-11"
             onClick={() => window.open(project.githubUrl, '_blank')}
           >
@@ -224,7 +240,7 @@ const ProjectsSection = () => {
             <span className="hidden sm:inline">Code Repository</span>
             <span className="sm:hidden">Code</span>
           </Button>
-          <Button 
+          <Button
             className="flex-1 bg-[#e27500] hover:bg-[#ff8800] text-white rounded-full transition-all duration-300 font-bold text-xs uppercase tracking-wider h-10 sm:h-11"
             onClick={() => setSelectedVideo(project)}
           >
@@ -264,7 +280,7 @@ const ProjectsSection = () => {
           <div className="relative">
             {/* Carousel Container */}
             <div className="overflow-hidden rounded-[2.5rem]">
-              <div 
+              <div
                 className="transition-transform duration-500 ease-out"
                 style={{
                   transform: `translateX(-${carouselIndex * 100}%)`
@@ -281,39 +297,38 @@ const ProjectsSection = () => {
             </div>
 
             {/* Navigation Arrows + Indicators row */}
-<div className="flex items-center justify-center gap-4 mt-6">
-  <button
-    onClick={handlePrevious}
-    className="flex items-center justify-center w-10 h-10 rounded-full bg-[#e27500] hover:bg-[#ff8800] text-white transition-all duration-300 shadow-lg"
-    aria-label="Previous project"
-  >
-    <ChevronLeft className="w-5 h-5" />
-  </button>
+            <div className="flex items-center justify-center gap-4 mt-6">
+              <button
+                onClick={handlePrevious}
+                className="flex items-center justify-center w-10 h-10 rounded-full bg-[#e27500] hover:bg-[#ff8800] text-white transition-all duration-300 shadow-lg"
+                aria-label="Previous project"
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </button>
 
-  {/* Indicators */}
-  <div className="flex justify-center gap-2">
-    {projects.map((_, index) => (
-      <button
-        key={index}
-        onClick={() => setCarouselIndex(index)}
-        className={`h-2 rounded-full transition-all duration-300 ${
-  index === carouselIndex 
-    ? 'bg-[#e27500] w-8' 
-    : 'bg-foreground/30 w-2 hover:bg-foreground/50'
-}`}
-        aria-label={`Go to project ${index + 1}`}
-      />
-    ))}
-  </div>
+              {/* Indicators */}
+              <div className="flex justify-center gap-2">
+                {projects.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCarouselIndex(index)}
+                    className={`h-2 rounded-full transition-all duration-300 ${index === carouselIndex
+                        ? 'bg-[#e27500] w-8'
+                        : 'bg-foreground/30 w-2 hover:bg-foreground/50'
+                      }`}
+                    aria-label={`Go to project ${index + 1}`}
+                  />
+                ))}
+              </div>
 
-  <button
-    onClick={handleNext}
-    className="flex items-center justify-center w-10 h-10 rounded-full bg-[#e27500] hover:bg-[#ff8800] text-white transition-all duration-300 shadow-lg"
-    aria-label="Next project"
-  >
-    <ChevronRight className="w-5 h-5" />
-  </button>
-</div>
+              <button
+                onClick={handleNext}
+                className="flex items-center justify-center w-10 h-10 rounded-full bg-[#e27500] hover:bg-[#ff8800] text-white transition-all duration-300 shadow-lg"
+                aria-label="Next project"
+              >
+                <ChevronRight className="w-5 h-5" />
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -334,7 +349,7 @@ const ProjectsSection = () => {
                 <X size={20} />
               </Button>
             </div>
-            
+
             {/* Video Content */}
             <div className="relative aspect-video bg-black">
               {selectedVideo.demoVideo ? (
@@ -370,13 +385,13 @@ const ProjectsSection = () => {
                 </div>
               )}
             </div>
-            
+
             {/* Video Description */}
             <div className="p-4 sm:p-6 bg-background/50 border-t border-border/40 space-y-4 max-h-60 overflow-y-auto">
               <p className="text-xs sm:text-sm text-muted-foreground font-medium leading-relaxed">{selectedVideo.description}</p>
               <div className="flex flex-wrap gap-1.5">
                 {selectedVideo.technologies.map((tech, index) => (
-                  <Badge 
+                  <Badge
                     key={index}
                     variant="secondary"
                     className="bg-card text-foreground border border-border/50 text-xs font-semibold px-2.5 py-1"
