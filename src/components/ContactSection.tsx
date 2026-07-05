@@ -5,19 +5,79 @@ import { Textarea } from '@/components/ui/textarea';
 import { Mail, Phone, MapPin, Send, MessageSquare } from 'lucide-react';
 import { useState } from 'react';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
+import { useToast } from '@/hooks/use-toast';
 
 const ContactSection = () => {
+  const { toast } = useToast();
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: ''
+  });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const headerRef = useScrollReveal({ threshold: 0.2 });
   const formRef = useScrollReveal({ threshold: 0.1, delay: 100 });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    if (!formData.name || !formData.email || !formData.subject || !formData.message) {
+      toast({
+        title: "Error",
+        description: "Please fill in all fields",
+        variant: "destructive"
+      });
+      return;
+    }
+
     setIsSubmitting(true);
-    setTimeout(() => {
+    
+    try {
+      const formId = import.meta.env.VITE_FORMSPREE_FORM_ID;
+      const response = await fetch(`https://formspree.io/f/${formId}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to send');
+      }
+
+      toast({
+        title: "Success!",
+        description: "Your message has been sent successfully.",
+      });
+
+      setFormData({
+        name: '',
+        email: '',
+        subject: '',
+        message: ''
+      });
+    } catch (error) {
+      console.error('Email send error:', error);
+      toast({
+        title: "Error",
+        description: "Failed to send message. Please try again.",
+        variant: "destructive"
+      });
+    } finally {
       setIsSubmitting(false);
-      alert('Message sent successfully!');
-    }, 1500);
+    }
   };
 
   return (
@@ -69,6 +129,9 @@ const ContactSection = () => {
                       <label htmlFor="name" className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Your Name</label>
                       <Input 
                         id="name"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleChange}
                         placeholder="John Doe" 
                         required
                         className="bg-background border-border/50 focus-visible:ring-[#e27500] h-12 rounded-xl text-foreground font-semibold px-4"
@@ -78,7 +141,10 @@ const ContactSection = () => {
                       <label htmlFor="email" className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Email Address</label>
                       <Input 
                         id="email"
+                        name="email"
                         type="email" 
+                        value={formData.email}
+                        onChange={handleChange}
                         placeholder="john@example.com" 
                         required
                         className="bg-background border-border/50 focus-visible:ring-[#e27500] h-12 rounded-xl text-foreground font-semibold px-4"
@@ -90,6 +156,9 @@ const ContactSection = () => {
                     <label htmlFor="subject" className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Subject</label>
                     <Input 
                       id="subject"
+                      name="subject"
+                      value={formData.subject}
+                      onChange={handleChange}
                       placeholder="Project Inquiry / Job Opportunity" 
                       required
                       className="bg-background border-border/50 focus-visible:ring-[#e27500] h-12 rounded-xl text-foreground font-semibold px-4"
@@ -100,6 +169,9 @@ const ContactSection = () => {
                     <label htmlFor="message" className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Your Message</label>
                     <Textarea 
                       id="message"
+                      name="message"
+                      value={formData.message}
+                      onChange={handleChange}
                       placeholder="Hi Renz, I'd like to talk about..." 
                       className="min-h-[160px] bg-background border-border/50 focus-visible:ring-[#e27500] resize-y rounded-xl text-foreground font-semibold p-4"
                       required
